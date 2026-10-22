@@ -14,10 +14,12 @@ Otevři `index.html` v prohlížeči. Žádný build ani server není potřeba.
 - `test.html` — vlastní test
 - `css/common.css` — barvy, typografie, ovládací prvky
 - `css/test.css` — rozvržení testu
+- `css/overlay.css` — vše, co se vznáší nad stránkou (okénka, kalkulačka, nápověda)
 - `js/scoring.js` — vyhodnocení; oddělené a spustitelné i v Node
 - `js/state.js` — stav odpovědí a pomocné funkce
 - `fonts/` — písmo Inter uložené v repozitáři (žádný požadavek na cizí server)
 - `docs/verze-2.md` — zadání úprav pro verzi 2
+- `js/helio.js` — kresba modulu Helio, sdílená úvodní stránkou i otázkou 2
 - `js/questions.js` — jednotlivé otázky
 - `js/simulation.js` — otázka 2: mapa Zedlandu, simulace a tabulka
 - `js/test.js` — režimy, navigace, časomíra

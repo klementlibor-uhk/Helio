@@ -72,8 +72,8 @@ var QUESTIONS = [
     left: function () {
       return '<p class="eyebrow">Otázka 1 ze 4</p>' +
         '<p>Na Zemi je nedostatek čisté pitné vody, která je pro mnoho lidí stále nedostupná.</p>' +
-        '<p>Přímý přístup k pitné vodě mají pouze osoby z kategorií <mark>Základní</mark> ' +
-        'a <mark>Bez rizika</mark>.</p>' +
+        '<p>Přímý přístup k pitné vodě mají pouze osoby z kategorií <strong>Základní</strong> ' +
+        'a <strong>Bez rizika</strong>.</p>' +
         '<hr class="sep-thin">' +
         '<p class="question">V roce 2015 žilo na Zemi přibližně 7 miliard lidí. ' +
         'Kolik z nich nemělo přímý přístup k pitné vodě?</p>' +

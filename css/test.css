@@ -3,7 +3,7 @@ html, body { height: 100%; }
 .app {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   max-width: 1240px;
   margin: 0 auto;
 }
@@ -15,7 +15,7 @@ html, body { height: 100%; }
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 13px 24px;
+  padding: 10px 24px;
   background: var(--blue-700);
   color: #fff;
 }
@@ -42,17 +42,19 @@ html, body { height: 100%; }
   flex: 1 1 auto;
   min-height: 0;
   display: grid;
-  grid-template-columns: 44fr 56fr;
+  grid-template-columns: 47fr 53fr;
   gap: 18px;
-  padding: 18px 24px;
+  align-content: center;
+  padding: 12px 24px;
 }
 .panel {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 14px;
   box-shadow: var(--shadow);
-  padding: 26px 30px;
+  padding: 16px 24px;
   overflow-y: auto;
+  min-height: 380px;
 }
 .panels.single { grid-template-columns: 1fr; }
 
@@ -64,13 +66,13 @@ html, body { height: 100%; }
   text-transform: uppercase;
   font-weight: 600;
   color: var(--blue);
-  margin: 0 0 14px;
+  margin: 0 0 10px;
 }
 .question { font-size: 18px; font-weight: 600; line-height: 1.45; }
 .hint { font-size: 15px; color: var(--ink-soft); }
 .steps { margin: 14px 0 0; padding-left: 22px; font-size: 15px; color: var(--ink-soft); }
 .steps li { margin-bottom: 4px; }
-.sep-thin { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+.sep-thin { border: 0; border-top: 1px solid var(--line); margin: 30px 0 24px; }
 mark { background: #FDF0C4; color: inherit; padding: 1px 3px; border-radius: 3px; }
 
 .answer-block {
@@ -106,16 +108,19 @@ mark { background: #FDF0C4; color: inherit; padding: 1px 3px; border-radius: 3px
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 24px;
+  padding: 10px 24px;
   background: var(--white);
-  border-top: 1px solid var(--line);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  margin: 0 24px 12px;
+  box-shadow: var(--shadow);
 }
 .footer .spacer { margin-left: auto; }
 .help-btn { width: 44px; padding: 0; font-size: 18px; font-weight: 600; }
 
 /* ---------- otázka 2: mapa, škála, simulace, tabulka ---------- */
 
-.map { margin: 16px 0 0; }
+.map { margin: 10px 0 0; }
 .zedland { display: block; border-radius: 8px; border: 1px solid var(--line-strong); }
 .town { cursor: pointer; }
 .town .hit { fill: transparent; }
@@ -125,7 +130,7 @@ mark { background: #FDF0C4; color: inherit; padding: 1px 3px; border-radius: 3px
 .town:focus { outline: none; }
 .town:focus-visible .dot { stroke: var(--blue); stroke-width: 6; }
 
-.scale-label { font-size: 15px; color: var(--ink); margin: 16px 0 6px; font-weight: 500; }
+.scale-label { font-size: 15px; color: var(--ink); margin: 10px 0 5px; font-weight: 500; }
 .scale { display: flex; border-radius: 5px; overflow: hidden; }
 .scale span { flex: 1; text-align: center; font-size: 14px; font-weight: 600; padding: 4px 0; }
 .chosen { font-size: 16px; color: var(--ink-soft); margin: 14px 0 0; }
@@ -197,31 +202,16 @@ table.data tr.empty td {
   text-align: center; color: var(--ink-mute); font-size: 14px; padding: 16px;
 }
 
-/* animace vzniku vody */
-.helio .vapor, .helio .drops, .helio .spark { transform-box: view-box; }
-.helio.playing .vapor { animation: h-vapor 3s ease-out; }
-.helio.playing .drops { animation: h-drops 3s ease-out; }
-.helio.playing .flow-in { animation: h-dash 3s linear; }
-.helio.playing .flow-out { animation: h-dash-late 3s linear; }
-.helio.playing .spark { animation: h-spark 3s ease-out; }
-@keyframes h-vapor { 0%, 16% { opacity: 0 } 36%, 100% { opacity: 1 } }
-@keyframes h-drops { 0%, 44% { opacity: 0 } 62%, 100% { opacity: 1 } }
-@keyframes h-dash { from { stroke-dashoffset: 160 } to { stroke-dashoffset: 0 } }
-@keyframes h-dash-late { 0%, 55% { stroke-dashoffset: 120 } 100% { stroke-dashoffset: 0 } }
-@keyframes h-spark { 0% { opacity: 0.2 } 14%, 100% { opacity: 1 } }
-@media (prefers-reduced-motion: reduce) {
-  .helio.playing * { animation: none !important; }
-}
 
 /* ---------- otázka 3: krabice a kamiony ---------- */
 
-.boxes { display: flex; gap: 10px; align-items: flex-end; margin: 16px 0 0; }
+.boxes { display: flex; gap: 10px; align-items: flex-end; margin: 12px 0 0; }
 .boxes img { display: block; }
-.boxes img:first-child { width: 56%; }
-.boxes img:last-child { width: 44%; }
-.trucks-title { margin: 22px 0 8px; }
+.boxes img:first-child { width: 48%; }
+.boxes img:last-child { width: 37%; }
+.trucks-title { margin: 16px 0 6px; }
 .truck-label { font-size: 14px; font-weight: 500; margin: 0 0 3px; }
-img.truck { display: block; width: 100%; margin: 0 0 14px; }
+img.truck { display: block; width: 100%; margin: 0 0 8px; }
 .trucks-note { margin-top: 8px; }
 
 /* ---------- otázka 4: farma ---------- */
@@ -245,24 +235,6 @@ img.farm {
   font-weight: 600; color: var(--ink-mute); margin: 0 0 12px;
 }
 
-/* ---------- okénka ---------- */
-
-.modal-back {
-  position: fixed; inset: 0; z-index: 40;
-  background: rgba(10, 40, 70, 0.42);
-  display: flex; align-items: center; justify-content: center;
-  padding: 20px;
-}
-.modal {
-  background: var(--white);
-  border-radius: 16px;
-  padding: 26px 28px;
-  max-width: 460px;
-  box-shadow: 0 16px 44px rgba(10, 40, 70, 0.24);
-}
-.modal h2 { margin: 0 0 10px; }
-.modal p { font-size: 16px; margin: 0 0 20px; }
-.modal-actions { display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
 
 /* ---------- výsledek ---------- */
 
@@ -366,7 +338,7 @@ img.farm {
 }
 
 /* mapa o třetinu menší — žák na ní trefuje jen čtyři kolečka */
-.map-wrap { max-width: 330px; }
+.map-wrap { max-width: min(224px, 24vh); margin: 0 auto; }
 
 .figure-title .unit-note {
   display: block;
@@ -376,17 +348,123 @@ img.farm {
   margin-top: 2px;
 }
 
-/* kapky stékající po vnitřní klenbě do žlabu */
-.helio .drop { transform-box: view-box; }
-.helio.playing .drop-a { animation: h-run-a 3s ease-in; }
-.helio.playing .drop-b { animation: h-run-b 3s ease-in; }
+
+/* ---------- animace vzniku vody (3,2 s) ---------- */
+/* Pořadí fází: slunce rozsvítí panel → čerpadlo přižene mořskou vodu do vaničky →
+   odpařování a pára → kondenzace na stěně → kapky stékají na dno → odtok ven. */
+
+.helio .vapor, .helio .drops, .helio .spark, .helio .drop { transform-box: view-box; }
+.helio .flow-in, .helio .flow-out { stroke-dashoffset: 0; }
+
+.helio.playing .spark    { animation: h-spark 3.2s ease-out; }
+.helio.playing .flow-in  { animation: h-in 3.2s linear; }
+.helio.playing .vapor    { animation: h-vapor 3.2s ease-out; }
+.helio.playing .drops    { animation: h-drops 3.2s ease-out; }
+.helio.playing .drop-a   { animation: h-run-a 3.2s ease-in; }
+.helio.playing .drop-b   { animation: h-run-b 3.2s ease-in; }
+.helio.playing .drop-c   { animation: h-run-c 3.2s ease-in; }
+.helio.playing .flow-out { animation: h-out 3.2s linear; }
+
+@keyframes h-spark { 0% { opacity: 0.25 } 10%, 100% { opacity: 1 } }
+@keyframes h-in    { 0% { stroke-dashoffset: 300 } 40%, 100% { stroke-dashoffset: 0 } }
+@keyframes h-vapor { 0%, 26% { opacity: 0 } 48%, 100% { opacity: 1 } }
+@keyframes h-drops { 0%, 46% { opacity: 0 } 64%, 100% { opacity: 1 } }
 @keyframes h-run-a {
-  0%, 50% { opacity: 0; transform: translate(0, 0); }
-  58% { opacity: 1; }
-  100% { opacity: 1; transform: translate(-4px, 22px); }
+  0%, 58% { opacity: 0; transform: translate(0, 0); }
+  64% { opacity: 1; }
+  92%, 100% { opacity: 1; transform: translate(-4px, 70px); }
 }
 @keyframes h-run-b {
-  0%, 56% { opacity: 0; transform: translate(0, 0); }
-  64% { opacity: 1; }
-  100% { opacity: 1; transform: translate(4px, 26px); }
+  0%, 64% { opacity: 0; transform: translate(0, 0); }
+  70% { opacity: 1; }
+  96%, 100% { opacity: 1; transform: translate(5px, 74px); }
 }
+@keyframes h-run-c {
+  0%, 70% { opacity: 0; transform: translate(0, 0); }
+  76% { opacity: 1; }
+  100% { opacity: 1; transform: translate(-2px, 44px); }
+}
+@keyframes h-out   { 0%, 72% { stroke-dashoffset: 200 } 100% { stroke-dashoffset: 0 } }
+
+@media (prefers-reduced-motion: reduce) {
+  .helio.playing * { animation: none !important; }
+}
+
+/* ---------- otázka 2: rozvržení pravého panelu ---------- */
+/* Obrázek vedle ovladačů, tabulka přes celou šířku pod nimi. */
+.q2-top {
+  display: grid;
+  grid-template-columns: 45fr 55fr;
+  gap: 16px;
+  align-items: start;
+}
+.q2-fig .helio-wrap { padding: 6px; }
+.q2-fig .helio-text { margin-top: 8px; font-size: 13px; line-height: 1.5; }
+.q2-controls .sim { margin: 0; }
+.q2-controls .slider-row { margin-bottom: 10px; }
+.q2-controls .slider-row label { width: 104px; font-size: 14px; }
+.sim-note { font-size: 12px; margin-top: 8px; }
+.play { width: 34px; height: 34px; right: 8px; bottom: 8px; }
+
+/* tabulka nesmí růst donekonečna — výška je rozpočet, ne přání */
+#table-wrap { margin-top: 14px; max-height: 178px; overflow-y: auto; }
+
+/* sevřenější text v panelech */
+.panel p { margin-bottom: 11px; }
+.steps { margin-top: 10px; }
+.steps li { margin-bottom: 2px; }
+.chosen { margin-top: 10px; }
+
+/* ---------- doladění rozpočtu výšky ---------- */
+.steps { font-size: 14px; line-height: 1.5; margin-top: 8px; padding-left: 20px; }
+.steps li { margin-bottom: 1px; }
+.chosen { font-size: 15px; margin-top: 8px; }
+.chosen strong { font-size: 16px; }
+.scale span { padding: 3px 0; font-size: 13px; }
+.scale-label { font-size: 14px; margin: 8px 0 4px; }
+
+.result h1 { margin-bottom: 2px; }
+.score-row { margin: 16px 0 18px; gap: 12px; }
+.score { padding: 10px 14px; }
+.score strong { font-size: 25px; }
+.qlist button { padding: 10px 14px; }
+.qlist li { margin-bottom: 6px; }
+.result-actions { margin-top: 18px; }
+
+/* Mapa se přizpůsobí výšce okna: na vyšších obrazovkách větší, na nižších menší.
+   Lepší než jedno pevné číslo vyladěné na jeden monitor. */
+.panel p { margin-bottom: 9px; }
+.question { line-height: 1.4; }
+.eyebrow { margin-bottom: 9px; }
+.q2-fig .helio-text { font-size: 12.5px; }
+
+/* Kresby u otázky 3 se nesmí řídit šířkou panelu — tím rostly do výšky.
+   Výšku odvozujeme od okna, šířka se dopočítá podle poměru stran. */
+.boxes { justify-content: center; align-items: flex-end; }
+.boxes img, .boxes img:first-child, .boxes img:last-child {
+  width: auto;
+  height: 19vh;
+  max-height: 168px;
+}
+img.truck {
+  width: auto;
+  height: 13.5vh;
+  max-height: 112px;
+  margin: 0 0 6px;
+}
+.trucks-note { font-size: 13px; }
+
+.answer-block textarea { height: 13vh; min-height: 84px; max-height: 150px; }
+#table-wrap { max-height: 158px; }
+
+.boxes img, .boxes img:first-child, .boxes img:last-child { height: 16vh; max-height: 150px; }
+img.truck { height: 11.5vh; max-height: 98px; margin: 0 0 4px; }
+.truck-label { font-size: 13px; margin: 0 0 1px; }
+.trucks-title { margin: 12px 0 4px; }
+.boxes { margin-top: 10px; }
+
+/* poslední doladění rozpočtu — na nižších oknech se musí vejít i otázky 2 a 3 */
+.topbar { padding: 8px 24px; }
+.panels { padding: 10px 24px; }
+.panel { padding: 14px 22px; }
+.footer { padding: 8px 22px; margin: 0 24px 10px; }

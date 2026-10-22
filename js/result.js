@@ -147,15 +147,18 @@ var Result = (function () {
     if (i === 0) {
       return '<svg viewBox="0 0 360 120" width="100%" role="img" ' +
         'aria-label="Pás rozdělený na 71, 17 a 12 procent; prvních 88 procent má přímý přístup.">' +
+        /* stejné odstíny jako hlavní graf u otázky — data se nepřebarvují,
+           to podstatné vyznačují svorky a popis */
         '<rect x="20" y="44" width="213" height="32" fill="#14558C"></rect>' +
-        '<rect x="233" y="44" width="51" height="32" fill="#5B9BD5"></rect>' +
-        '<rect x="284" y="44" width="36" height="32" fill="#E0A33A"></rect>' +
+        '<rect x="233" y="44" width="51" height="32" fill="#3E82BE"></rect>' +
+        '<rect x="284" y="44" width="12" height="32" fill="#7FB0DC"></rect>' +
+        '<rect x="296" y="44" width="18" height="32" fill="#AFD0EA"></rect>' +
+        '<rect x="314" y="44" width="6" height="32" fill="#D8E8F5"></rect>' +
         '<text x="126" y="65" font-size="13" fill="#fff" text-anchor="middle">71 %</text>' +
-        '<text x="258" y="65" font-size="13" fill="#0A3A63" text-anchor="middle">17 %</text>' +
-        '<text x="302" y="65" font-size="13" fill="#4A3005" text-anchor="middle">12 %</text>' +
+        '<text x="258" y="65" font-size="13" fill="#fff" text-anchor="middle">17 %</text>' +
         '<path d="M20 36 V28 H284 V36" fill="none" stroke="#44566B" stroke-width="1.4"></path>' +
         '<text x="152" y="20" font-size="13" fill="#162434" text-anchor="middle">88 % má přímý přístup</text>' +
-        '<path d="M302 84 V96" stroke="#9A2727" stroke-width="1.4"></path>' +
+        '<path d="M284 84 V92 H320 V84" fill="none" stroke="#9A2727" stroke-width="1.4"></path>' +
         '<text x="320" y="110" font-size="13" fill="#9A2727" text-anchor="end">12 % nemá = 840 milionů</text>' +
         '</svg>';
     }
@@ -187,30 +190,36 @@ var Result = (function () {
         '</svg>';
     }
     if (i === 2) {
-      function floorPlan(y, label, lens, counts) {
-        var out = '<text x="0" y="' + (y - 6) + '" font-size="12" fill="#162434">' + label + '</text>';
-        var x = 60;
+      /* Každý součet patří pod svou dvojici návěsů — ve verzi 2 byl jeden
+         společný řádek o šest bodů níž, takže se popisky překrývaly, a dvě
+         sdělení oddělená mezerami se slepila (SVG opakované mezery zahazuje). */
+      function floorPlan(y, label, lens, counts, total) {
+        var out = '<text x="0" y="' + y + '" font-size="12" font-weight="600" ' +
+          'fill="#162434">' + label + '</text>';
+        var x = 62, top = y + 10;
         lens.forEach(function (len, k) {
           var w = Math.round(len * 18);
-          out += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="46" ' +
+          out += '<rect x="' + x + '" y="' + top + '" width="' + w + '" height="46" ' +
             'fill="#EEF5FB" stroke="#14558C" stroke-width="1.4"></rect>';
           for (var b = 0; b < counts[k]; b++) {
-            out += '<rect x="' + (x + 2 + b * 29) + '" y="' + (y + 2) + '" width="28" height="30" ' +
-              'fill="#8A1E2B" stroke="#4A1018"></rect>';
+            out += '<rect x="' + (x + 3 + b * 29) + '" y="' + (top + 3) + '" width="26" ' +
+              'height="30" fill="#8A1E2B" stroke="#F7FAFD" stroke-width="1.4"></rect>';
           }
-          out += '<text x="' + (x + w / 2) + '" y="' + (y + 60) + '" font-size="11" ' +
+          out += '<text x="' + (x + w / 2) + '" y="' + (top + 60) + '" font-size="11" ' +
             'text-anchor="middle" fill="#44566B">' + String(len).replace('.', ',') + ' m — ' +
             counts[k] + ' krabice</text>';
           x += w + 10;
         });
+        out += '<text x="0" y="' + (top + 78) + '" font-size="12" fill="#14558C">' +
+          total + '</text>';
         return out;
       }
-      return '<svg viewBox="0 0 360 180" width="100%" role="img" ' +
+      return '<svg viewBox="0 0 360 230" width="100%" role="img" ' +
         'aria-label="Půdorys ložných ploch: kamion I pojme 4 a 4 krabice, kamion II 4 a 5.">' +
-        floorPlan(20, 'Kamion I', [7.7, 7.7], [4, 4]) +
-        floorPlan(110, 'Kamion II', [7.3, 8.2], [4, 5]) +
-        '<text x="0" y="176" font-size="12" fill="#162434">' +
-        '8 · 3 vrstvy = 24 modulů        9 · 3 vrstvy = 27 modulů</text>' +
+        floorPlan(14, 'Kamion s návěsem I', [7.7, 7.7], [4, 4],
+          '8 krabic v jedné vrstvě · 3 vrstvy = 24 modulů') +
+        floorPlan(128, 'Kamion s návěsem II', [7.3, 8.2], [4, 5],
+          '9 krabic v jedné vrstvě · 3 vrstvy = 27 modulů') +
         '</svg>';
     }
     var rows = [

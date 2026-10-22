@@ -57,7 +57,7 @@ function answerSelect(key, options) {
 /* Volná odpověď textem. */
 function answerText(key, label, placeholder, note) {
   return '<label class="text-label" for="' + key + '">' + label + '</label>' +
-    '<textarea id="' + key + '" data-answer="' + key + '" rows="6" ' +
+    '<textarea id="' + key + '" data-answer="' + key + '" rows="4" ' +
     'placeholder="' + esc(placeholder || '') + '"' +
     (finished ? ' readonly' : '') + '>' + esc(answers[key] || '') + '</textarea>' +
     (note ? '<p class="hint small">' + note + '</p>' : '');

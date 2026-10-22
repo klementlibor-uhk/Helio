@@ -8,12 +8,12 @@
 
 .intro-card {
   width: 100%;
-  max-width: 1020px;
+  max-width: 1120px;
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 20px;
   box-shadow: var(--shadow);
-  padding: 48px 52px 28px;
+  padding: 60px 64px 32px;
 }
 
 .intro-head {
@@ -22,7 +22,8 @@
   align-items: center;
 }
 .intro-text { flex: 1 1 0; min-width: 0; }
-.intro-img { flex: 0 0 auto; width: 380px; max-width: 42%; }
+.intro-img { flex: 0 0 auto; width: 430px; max-width: 46%; }
+.intro-img svg { display: block; width: 100%; }
 
 .eyebrow {
   font-size: 14px;
@@ -32,9 +33,9 @@
   color: var(--blue);
   margin: 0 0 10px;
 }
-.intro-card h1 { font-size: 46px; letter-spacing: -0.02em; margin: 0 0 8px; }
+.intro-card h1 { font-size: 52px; letter-spacing: -0.02em; margin: 0 0 8px; }
 .subtitle { font-size: 17px; color: var(--ink-soft); margin: 0 0 24px; }
-.lead { font-size: 20px; line-height: 1.6; margin: 0 0 34px; max-width: 30em; }
+.lead { font-size: 21px; line-height: 1.6; margin: 0 0 38px; max-width: 28em; }
 
 .start-row {
   display: flex;
@@ -42,7 +43,7 @@
   gap: 20px;
   flex-wrap: wrap;
 }
-button.big { height: 54px; font-size: 18px; padding: 0 32px; }
+button.big { height: 58px; font-size: 19px; padding: 0 38px; }
 .start-row .meta { font-size: 16px; color: var(--ink-soft); }
 
 .intro-foot {
