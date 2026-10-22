@@ -16,6 +16,8 @@ Otevři `index.html` v prohlížeči. Žádný build ani server není potřeba.
 - `css/test.css` — rozvržení testu
 - `js/scoring.js` — vyhodnocení; oddělené a spustitelné i v Node
 - `js/state.js` — stav odpovědí a pomocné funkce
+- `fonts/` — písmo Inter uložené v repozitáři (žádný požadavek na cizí server)
+- `docs/verze-2.md` — zadání úprav pro verzi 2
 - `js/questions.js` — jednotlivé otázky
 - `js/simulation.js` — otázka 2: mapa Zedlandu, simulace a tabulka
 - `js/test.js` — režimy, navigace, časomíra
@@ -44,5 +46,8 @@ záložky prohlížeče, odpovědi jen v paměti stránky. Žádné cookies, ž�
 
 Hotovo: úvodní obrazovka, všechny čtyři otázky, potvrzení odevzdání, výsledková
 obrazovka, prohlížení odpovědí s vysvětlením a tisk do portfolia.
-Test je obsahově kompletní. Zbývá pilotáž a rozhodnutí o zveřejnění přes GitHub Pages
-(k tomu je potřeba repozitář přepnout na veřejný).
+Verze 2: nový vzhled podle PISA (bílá a bledě modrá), vlastní písmo, panely jako dvě
+karty, oddělený blok odpovědi, úvodní stránka bez jména, profesionálnější graf,
+animace Helia podle skutečného principu, překreslená farma, stav „Nezodpovězeno“,
+potvrzení před ztrátou odpovědí a názorné postupy v tisku.
+Zbývá pilotáž a rozhodnutí o zveřejnění přes GitHub Pages (repozitář je zatím privátní).

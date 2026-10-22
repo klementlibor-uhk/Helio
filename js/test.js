@@ -114,8 +114,8 @@ var Engine = (function () {
     else if (action === 'review') setMode('review', Number(btn.getAttribute('data-q')));
     else if (action === 'portfolio') setMode('portfolio');
     else if (action === 'print') window.print();
-    else if (action === 'home') location.href = 'index.html';
-    else if (action === 'restart') location.reload();
+    else if (action === 'home') Result.confirmHome(function () { location.href = 'index.html'; });
+    else if (action === 'restart') Result.confirmRestart(function () { location.reload(); });
     else if (action === 'calc') Calculator.open();
     else if (action === 'help') Help.open();
   }
@@ -135,9 +135,6 @@ var Engine = (function () {
 
     el.footer.addEventListener('click', onFooterClick);
     el.panels.addEventListener('click', onFooterClick);
-
-    var name = Profile.read();
-    if (name) document.getElementById('pupil').textContent = name;
 
     el.clock.textContent = formatTime(0);
     timer = setInterval(tick, 1000);

@@ -5,43 +5,59 @@
 /* Skládaný sloupcový graf přístupu k pitné vodě v roce 2015.
    Kreslíme ho z dat, ne jako obrázek — je ostrý v každé velikosti. */
 function chartAccess() {
+  /* Jeden modrý odstínový pás přes všech pět kategorií. Záměrně neutrální:
+     kdyby se kategorie bez přístupu lišily barvou, prozradilo by to řešení. */
   var rows = [
-    { label: 'Povrchová voda', pct: 2,  color: '#D85A30', text: null },
-    { label: 'Neupravená',     pct: 6,  color: '#EF9F27', text: null },
-    { label: 'Omezený přístup', pct: 4, color: '#FAC775', text: null },
-    { label: 'Základní',       pct: 17, color: '#85B7EB', text: '#042C53' },
-    { label: 'Bez rizika',     pct: 71, color: '#378ADD', text: '#FFFFFF' }
+    { label: 'Povrchová voda',  pct: 2,  color: '#D8E8F5', dark: true },
+    { label: 'Neupravená',      pct: 6,  color: '#AFD0EA', dark: true },
+    { label: 'Omezený přístup', pct: 4,  color: '#7FB0DC', dark: true },
+    { label: 'Základní',        pct: 17, color: '#3E82BE', dark: false },
+    { label: 'Bez rizika',      pct: 71, color: '#14558C', dark: false }
   ];
 
-  var top = 20, height = 200, barX = 60, barW = 52, y = top, bars = '', legend = '';
+  var top = 18, height = 232, barX = 34, barW = 54;
+  var labelX = 128, leadEnd = 120;
+  /* Tři horní kategorie jsou tenké, popisky by se překryly — rozestoupí se. */
+  var labelY = [26, 52, 78, 116, 206];
+
+  var y = top, bars = '', leads = '', labels = '';
   rows.forEach(function (r, i) {
     var h = height * r.pct / 100;
-    bars += '<rect x="' + barX + '" y="' + y + '" width="' + barW + '" height="' + h +
-            '" fill="' + r.color + '"></rect>';
-    if (r.text) {
-      bars += '<text x="' + (barX + barW / 2) + '" y="' + (y + h / 2 + 4) +
-              '" font-size="12" text-anchor="middle" fill="' + r.text + '">' + r.pct + '</text>';
-    }
+    bars += '<rect x="' + barX + '" y="' + y.toFixed(1) + '" width="' + barW +
+      '" height="' + h.toFixed(1) + '" fill="' + r.color + '"></rect>';
+    var mid = y + h / 2;
+    leads += '<path d="M' + (barX + barW) + ' ' + mid.toFixed(1) + ' H' + (barX + barW + 12) +
+      ' L' + leadEnd + ' ' + labelY[i] + ' H' + (labelX - 4) +
+      '" fill="none" stroke="#9FBBD2" stroke-width="1"></path>';
+    labels += '<text x="' + labelX + '" y="' + (labelY[i] + 4) + '" font-size="14" fill="#162434">' +
+      r.label + ' <tspan font-weight="600">' + r.pct + ' %</tspan></text>';
     y += h;
-    var ly = 70 + i * 24;
-    legend += '<rect x="128" y="' + ly + '" width="12" height="12" rx="2" fill="' + r.color + '"></rect>' +
-              '<text x="148" y="' + (ly + 10) + '" font-size="12" fill="#2C2C2A">' +
-              r.label + ' — ' + r.pct + ' %</text>';
+  });
+
+  /* Jemné bílé spáry mezi segmenty, aby byly rozeznatelné i tenké kategorie. */
+  var seams = '', sy = top;
+  rows.forEach(function (r, i) {
+    sy += height * r.pct / 100;
+    if (i < rows.length - 1) {
+      seams += '<rect x="' + barX + '" y="' + (sy - 0.75).toFixed(1) + '" width="' + barW +
+        '" height="1.5" fill="#fff"></rect>';
+    }
   });
 
   var axis = '';
-  [100, 80, 60, 40, 20, 0].forEach(function (p) {
+  [0, 50, 100].forEach(function (p) {
     var ay = top + height * (100 - p) / 100;
-    axis += '<text x="50" y="' + (ay + 4) + '" font-size="11" text-anchor="end" fill="#888780">' +
-            p + ' %</text>';
+    axis += '<path d="M' + (barX - 7) + ' ' + ay + ' H' + barX + '" stroke="#C6D8E6"></path>' +
+      '<text x="' + (barX - 11) + '" y="' + (ay + 4) + '" font-size="12" text-anchor="end" ' +
+      'fill="#7589A0">' + p + '</text>';
   });
 
-  return '<p class="figure-title">Přístup k pitné vodě v roce 2015</p>' +
-    '<svg viewBox="0 0 300 240" width="100%" style="max-width:420px;display:block" role="img" ' +
-    'aria-label="Skládaný sloupcový graf: bez rizika 71 procent, základní 17, omezený přístup 4, ' +
+  return '<p class="figure-title">Přístup k pitné vodě v roce 2015 <span class="unit-note">' +
+    'podíl obyvatel světa v %</span></p>' +
+    '<svg viewBox="0 0 330 268" width="100%" style="max-width:430px;display:block" role="img" ' +
+    'aria-label="Skládaný sloupec: bez rizika 71 procent, základní 17, omezený přístup 4, ' +
     'neupravená 6, povrchová voda 2 procenta.">' +
-    axis + bars + legend +
-    '<line x1="59" y1="' + top + '" x2="59" y2="' + (top + height) + '" stroke="#D9DEE4"></line>' +
+    axis + bars + seams + leads + labels +
     '</svg>' +
     '<p class="figure-source">Zdroj: Progress on drinking water, sanitation and hygiene 2017, WHO a UNICEF.</p>';
 }
@@ -62,7 +78,7 @@ var QUESTIONS = [
         '<p class="question">V roce 2015 žilo na Zemi přibližně 7 miliard lidí. ' +
         'Kolik z nich nemělo přímý přístup k pitné vodě?</p>' +
         '<p class="hint">Odpověď uveď v milionech.</p>' +
-        answerNumber('q1', 'milionů');
+        answerBlock(answerNumber('q1', 'milionů'));
     },
     right: chartAccess
   },
@@ -77,13 +93,15 @@ var QUESTIONS = [
     left: function () {
       return '<p class="eyebrow">Otázka 3 ze 4</p>' +
         '<p class="question">Do kterého typu kamionu se vejde více modulů Helio?</p>' +
-        answerSelect('q3', 'Vyber jednu možnost:', [
-          { value: 'I', text: 'Kamion s návěsem I' },
-          { value: 'II', text: 'Kamion s návěsem II' },
-          { value: 'stejne', text: 'Oba typy jsou stejně výhodné' }
-        ]) +
-        answerText('q3text', 'Vysvětli svou odpověď.',
-          'Vysvětlení se neboduje. V přehledu odpovědí ho uvidíš vedle vzorového řešení.');
+        answerBlock(
+          answerSelect('q3', [
+            { value: 'I', text: 'Kamion s návěsem I' },
+            { value: 'II', text: 'Kamion s návěsem II' },
+            { value: 'stejne', text: 'Oba typy jsou stejně výhodné' }
+          ]) +
+          answerText('q3text', 'Vysvětli svou odpověď.', 'Napiš své vysvětlení…',
+            'Vysvětlení se neboduje. V přehledu odpovědí ho uvidíš vedle vzorového řešení.')
+        );
     },
     right: function () {
       return '<p>Městský úřad se rozhodl vyřešit problémy s pitnou vodou výstavbou farmy ' +
@@ -115,7 +133,7 @@ var QUESTIONS = [
         'splátkách po dobu 20 let.</p>' +
         '<hr class="sep-thin">' +
         '<p class="question">Jaká je jedna měsíční splátka, kterou je třeba platit bance?</p>' +
-        answerNumber('q4', 'zedů');
+        answerBlock(answerNumber('q4', 'zedů'));
     },
     right: function () {
       return '<img class="farm" src="img/farma.svg" ' +

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pitná voda — úvod</title>
+<title>Pitná voda</title>
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/intro.css">
 </head>
@@ -12,45 +12,60 @@
   <div class="intro-card">
 
     <div class="intro-head">
-      <div class="text">
+      <div class="intro-text">
         <p class="eyebrow">Matematická úloha</p>
         <h1>Pitná voda</h1>
         <p class="subtitle">Inspirováno mezinárodním šetřením PISA</p>
-        <p class="lead">Čtyři otázky o tom, jak se dá ze slunce vyrábět pitná voda — budeš
-          číst graf, pracovat se simulací, počítat s rozměry a s penězi.</p>
+        <p class="lead">Čtyři úlohy o tom, jak se dá ze slunce vyrábět pitná voda.
+          Budeš číst graf, pracovat se simulací, počítat s rozměry a s penězi.</p>
+
+        <div class="start-row">
+          <button class="primary big" id="start">Spustit test</button>
+          <span class="meta">4 úlohy · nespěchej, čas není omezený</span>
+        </div>
       </div>
-      <img src="img/helio-modul.svg" alt="Modul Helio: slunce, solární panel, čerpadlo a koule, ve které se mořská voda mění na pitnou.">
+
+      <img class="intro-img" src="img/helio-modul.svg"
+           alt="Modul Helio: slunce, solární panel, čerpadlo a koule, ve které se mořská voda mění na pitnou.">
     </div>
 
-    <hr class="sep">
-
-    <label class="field" for="pupil-name">Tvoje jméno <span class="optional">(nepovinné)</span></label>
-    <p class="hint">Objeví se na tvém přehledu odpovědí.</p>
-    <input type="text" id="pupil-name" maxlength="60" autocomplete="off" placeholder="Jak se jmenuješ?">
-
-    <div class="privacy">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
-      </svg>
-      <p>Nic se neodesílá ani neukládá. Odpovědi i jméno zůstávají jen v tomto okně
-        prohlížeče a po jeho zavření zmizí. Test není známkovaný.</p>
+    <div class="intro-foot">
+      <p class="source">Zdroj dat ke grafu: Progress on drinking water, sanitation and hygiene 2017,
+        WHO a UNICEF. Úloha je původní, připravená Českou republikou pro PISA 2021.</p>
+      <button class="privacy-link" id="privacy">
+        <svg width="17" height="19" viewBox="0 0 20 22" fill="none" aria-hidden="true">
+          <path d="M10 1 L18 4 V11 C18 16 14.5 19.5 10 21 C5.5 19.5 2 16 2 11 V4 Z"
+                stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M6.5 11 L9 13.5 L13.5 8.5" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Ochrana soukromí
+      </button>
     </div>
 
-    <div class="start-row">
-      <button class="primary" id="start">Spustit test</button>
-      <span class="meta">4 otázky · bez časového limitu · čas se jen měří</span>
-    </div>
-
-    <p class="source">Zdroj dat ke grafu: Progress on drinking water, sanitation and hygiene 2017,
-      WHO a UNICEF. Úloha je původní, připravená Českou republikou pro PISA 2021.</p>
   </div>
 </main>
 
-<script src="js/profile.js"></script>
 <script>
 document.getElementById('start').addEventListener('click', function () {
-  Profile.save(document.getElementById('pupil-name').value);
   location.href = 'test.html';
+});
+
+document.getElementById('privacy').addEventListener('click', function () {
+  var back = document.createElement('div');
+  back.className = 'modal-back';
+  back.innerHTML = '<div class="modal" role="dialog" aria-modal="true" aria-labelledby="pt">' +
+    '<h2 id="pt">Ochrana soukromí</h2>' +
+    '<p>Test nic neodesílá a nic neukládá. Tvoje odpovědi existují jen v paměti této ' +
+    'stránky a po jejím zavření beze stopy zmizí. Žádné cookies, žádné sledování, ' +
+    'nikdo se nedozví, jak ti to šlo. Test není známkovaný.</p>' +
+    '<div class="modal-actions"><button class="primary" id="privacy-ok">Rozumím</button></div>' +
+    '</div>';
+  back.addEventListener('click', function (e) {
+    if (e.target === back || e.target.id === 'privacy-ok') document.body.removeChild(back);
+  });
+  document.body.appendChild(back);
+  document.getElementById('privacy-ok').focus();
 });
 </script>
 </body>

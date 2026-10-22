@@ -146,6 +146,7 @@ var Calculator = (function () {
         box.style.left = Math.max(0, Math.min(window.innerWidth - r.width, ev.clientX - dx)) + 'px';
         box.style.top = Math.max(0, Math.min(window.innerHeight - r.height, ev.clientY - dy)) + 'px';
         box.style.right = 'auto';
+        box.style.bottom = 'auto';   /* jinak zustane ukotveny spodek a okno se roztahne */
       }
       function up() {
         document.removeEventListener('mousemove', move);

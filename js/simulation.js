@@ -87,44 +87,99 @@ var Sim = (function () {
       '<p>Lucy bydlí v jednom z měst na Zedlandu. Říká, že její rodina koupila jeden modul ' +
       'Helio a ten vyrobil 2 920 litrů pitné vody za rok. Modul pracoval průměrně 8 hodin denně.</p>' +
       '<p class="question">Ve kterém městě Lucy bydlí?</p>' +
-      '<p class="hint">Spusť simulaci, klikni na mapě na jedno město a v tabulce označ řádky, ' +
-      'které tvou odpověď podporují.</p>' +
+      '<ol class="steps">' +
+      '<li>Spusť simulaci a získej data.</li>' +
+      '<li>Na mapě klikni na město, kde podle tebe Lucy bydlí.</li>' +
+      '<li>V tabulce označ řádky, které tvou odpověď podporují.</li>' +
+      '</ol>' +
+      '<div class="map-wrap">' +
       '<div class="map">' + mapSVG() + '</div>' +
       scaleHTML() +
+      '</div>' +
       '<p class="chosen">Vybrané město: <strong id="chosen-town">' +
       (answers.q2town || '—') + '</strong></p>';
   }
 
   /* ---------- pravý panel: modul, posuvníky, tabulka ---------- */
 
+  /* Kresba modulu i scénář animace: slunce → panel → čerpadlo → přítok mořské vody →
+     odpařování → pára → kondenzace na klenbě → kapky stékají → sběrný žlab → odtok
+     přes remineralizaci ven. Jednotlivé fáze mají třídy, časování je v CSS. */
   function moduleSVG() {
-    return '<svg class="helio" id="helio-svg" viewBox="0 0 240 150" width="100%" role="img" ' +
-      'aria-label="Modul Helio: mořská voda se v kouli odpařuje a odtéká jako pitná voda.">' +
-      '<defs><clipPath id="sphere"><circle cx="120" cy="66" r="44"></circle></clipPath></defs>' +
-      '<circle cx="24" cy="24" r="13" fill="#FFCE3A"></circle>' +
+    var dots = '';
+    /* kapičky kondenzátu po vnitřní straně klenby */
+    for (var a = 200; a <= 340; a += 14) {
+      var rad = a * Math.PI / 180;
+      dots += '<circle cx="' + (150 + 42 * Math.cos(rad)).toFixed(1) +
+        '" cy="' + (76 + 42 * Math.sin(rad)).toFixed(1) + '" r="1.8" fill="#49A8E8"></circle>';
+    }
+
+    return '<svg class="helio" id="helio-svg" viewBox="0 0 260 172" width="100%" role="img" ' +
+      'aria-label="Modul Helio: solární panel pohání čerpadlo, mořská voda se v kouli odpařuje, ' +
+      'pára kondenzuje na klenbě, kapky stékají do sběrného žlabu a odtékají jako pitná voda.">' +
+      '<defs><clipPath id="sphere"><circle cx="150" cy="76" r="46"></circle></clipPath></defs>' +
+
+      /* slunce a paprsky */
+      '<circle cx="26" cy="22" r="13" fill="#FFCE3A"></circle>' +
       '<g stroke="#F2A81D" stroke-width="2.2" stroke-linecap="round">' +
-      '<path d="M24 4 V0"></path><path d="M4 24 H0"></path><path d="M9 9 L6 6"></path>' +
-      '<path d="M39 9 L42 6"></path><path d="M9 39 L6 42"></path></g>' +
-      '<path d="M40 30 L74 46" stroke="#FFCE3A" stroke-width="2.2" stroke-linecap="round"></path>' +
-      '<circle cx="120" cy="66" r="44" fill="#EDF4FB" stroke="#9FC2E3" stroke-width="1.4"></circle>' +
-      '<g clip-path="url(#sphere)"><g class="level">' +
-      '<rect x="74" y="70" width="92" height="60" fill="#3B8FE0"></rect></g></g>' +
+      '<path d="M26 2 V0"></path><path d="M6 22 H2"></path><path d="M11 7 L8 4"></path>' +
+      '<path d="M41 7 L44 4"></path><path d="M11 37 L8 40"></path></g>' +
+      '<path d="M40 30 L96 54" stroke="#FFCE3A" stroke-width="2.2" stroke-linecap="round"></path>' +
+      '<path d="M96 54 L87 51 L91 59 Z" fill="#FFCE3A"></path>' +
+      '<path d="M28 38 L30 96" stroke="#FFCE3A" stroke-width="2" stroke-dasharray="4 4"></path>' +
+
+      /* koule, voda, sběrný žlab */
+      '<circle cx="150" cy="76" r="46" fill="#EDF4FB" stroke="#9FC2E3" stroke-width="1.5"></circle>' +
+      '<g clip-path="url(#sphere)">' +
+      '<rect x="100" y="94" width="100" height="40" fill="#3B8FE0"></rect>' +
+      '<g class="drops">' + dots +
+      '<circle class="drop drop-a" cx="112" cy="58" r="2.6" fill="#2D7CD6"></circle>' +
+      '<circle class="drop drop-b" cx="188" cy="54" r="2.6" fill="#2D7CD6"></circle>' +
+      '</g></g>' +
+
+      /* pára a odpařování */
       '<g class="vapor">' +
-      '<path d="M102 56 q-7 0 -7 -6 q0 -6 7 -6 q2 -9 10 -9 q6 -6 13 -2 q9 -3 12 6 q7 1 7 6 ' +
-      'q0 6 -7 6 Z" fill="#FFFFFF" stroke="#B9D4EC"></path>' +
-      '<g stroke="#2D7CD6" stroke-width="1.8" stroke-dasharray="3 3">' +
-      '<path d="M104 70 V61"></path><path d="M120 70 V59"></path><path d="M136 70 V61"></path></g>' +
+      '<path d="M128 52 q-8 0 -8 -7 q0 -7 8 -7 q2 -10 11 -10 q7 -7 15 -2 q10 -4 13 7 q8 1 8 7 ' +
+      'q0 7 -8 7 Z" fill="#FFFFFF" stroke="#B9D4EC" stroke-width="1.2"></path>' +
+      '<g stroke="#2D7CD6" stroke-width="2" stroke-dasharray="3 3">' +
+      '<path d="M132 92 V70"></path><path d="M150 92 V66"></path><path d="M168 92 V70"></path></g>' +
+      '<path d="M128 70 L132 64 L136 70 Z" fill="#2D7CD6"></path>' +
+      '<path d="M146 66 L150 60 L154 66 Z" fill="#2D7CD6"></path>' +
+      '<path d="M164 70 L168 64 L172 70 Z" fill="#2D7CD6"></path>' +
       '</g>' +
-      '<rect x="74" y="68" width="92" height="5" rx="2" fill="#1A69B8"></rect>' +
-      '<path d="M96 73 C88 96 84 112 82 124" stroke="#5E6066" stroke-width="6.5" ' +
+      '<path d="M106 80 H126 M174 80 H194" stroke="#1A69B8" stroke-width="5" ' +
+      'stroke-linecap="round"></path>' +
+      '<text x="150" y="128" font-size="9" text-anchor="middle" fill="#0A3A63">sběrný žlab</text>' +
+
+      /* nohy a podstavec */
+      '<path d="M118 112 C110 128 106 140 104 150" stroke="#5E6066" stroke-width="7" ' +
       'stroke-linecap="round" fill="none"></path>' +
-      '<path d="M144 73 C152 96 156 112 158 124" stroke="#5E6066" stroke-width="6.5" ' +
+      '<path d="M182 112 C190 128 194 140 196 150" stroke="#5E6066" stroke-width="7" ' +
       'stroke-linecap="round" fill="none"></path>' +
-      '<ellipse cx="120" cy="124" rx="55" ry="7" fill="none" stroke="#8A8C92" stroke-width="2.5"></ellipse>' +
-      '<path d="M110 73 V142" stroke="#2D7CD6" stroke-width="5"></path>' +
-      '<path d="M132 73 V142" stroke="#6FB6EE" stroke-width="5"></path>' +
-      '<path d="M0 142 H240" stroke="#2D7CD6" stroke-width="5"></path>' +
-      '<path d="M132 142 H240" stroke="#6FB6EE" stroke-width="5"></path>' +
+      '<ellipse cx="150" cy="150" rx="56" ry="7" fill="none" stroke="#8A8C92" stroke-width="2.5"></ellipse>' +
+
+      /* potrubí: přítok tmavě, odtok světle */
+      '<path class="flow-in" d="M60 164 H134 V98" stroke="#1A69B8" stroke-width="5" ' +
+      'fill="none" stroke-dasharray="10 6"></path>' +
+      '<path d="M0 164 H60" stroke="#1A69B8" stroke-width="5"></path>' +
+      '<path class="flow-out" d="M190 82 V164 H230" stroke="#6FB6EE" stroke-width="5" ' +
+      'fill="none" stroke-dasharray="10 6"></path>' +
+      '<path d="M230 164 H260" stroke="#6FB6EE" stroke-width="5"></path>' +
+
+      /* solární panel, čerpadlo, remineralizace */
+      '<rect class="spark" x="10" y="96" width="42" height="28" rx="3" fill="#15396E"></rect>' +
+      '<g stroke="#4C6FB0" stroke-width="1.2">' +
+      '<path d="M24 96 V124"></path><path d="M38 96 V124"></path><path d="M10 106 H52"></path>' +
+      '<path d="M10 115 H52"></path></g>' +
+      '<path d="M31 124 V158 H44" stroke="#8A8C92" stroke-width="2" fill="none"></path>' +
+      '<rect x="44" y="154" width="36" height="18" rx="3" fill="#5E6066"></rect>' +
+      '<text x="48" y="167" font-size="8" fill="#FFFFFF">čerpadlo</text>' +
+      '<rect x="196" y="152" width="30" height="20" rx="3" fill="#9FA2A8"></rect>' +
+      '<g stroke="#5E6066" stroke-width="2">' +
+      '<path d="M203 155 V169"></path><path d="M211 155 V169"></path><path d="M219 155 V169"></path></g>' +
+      '<text x="0" y="158" font-size="9" fill="#1A69B8">mořská voda</text>' +
+      '<text x="232" y="158" font-size="9" fill="#1A69B8">pitná voda</text>' +
+      '<text x="8" y="92" font-size="9" fill="#15396E">solární panel</text>' +
       '</svg>';
   }
 
@@ -153,7 +208,11 @@ var Sim = (function () {
         '<td>' + r.irradiation + '</td>' +
         '<td>' + formatWater(r.water) + '</td>' +
         '<td class="del"><button type="button" class="remove" data-del="' + i + '" ' +
-        'aria-label="Smazat řádek ' + (i + 1) + '">−</button></td>' +
+        'title="Smazat řádek" aria-label="Smazat řádek ' + (i + 1) + '">' +
+        '<svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">' +
+        '<circle cx="11" cy="11" r="9.5" fill="#C62828"></circle>' +
+        '<path d="M7.5 7.5 L14.5 14.5 M14.5 7.5 L7.5 14.5" stroke="#fff" stroke-width="2.2" ' +
+        'stroke-linecap="round"></path></svg></button></td>' +
         '</tr>';
     }).join('');
 
@@ -161,9 +220,9 @@ var Sim = (function () {
       '<tr class="empty"><td colspan="5">Zatím žádná data. Nastav hodnoty a spusť simulaci.</td></tr>';
 
     return '<table class="data"><thead><tr>' +
-      '<th><span class="sr-only">Označení</span></th>' +
+      '<th class="star">Označ</th>' +
       '<th>Doba (h)</th><th>Záření</th><th>Voda (l)</th>' +
-      '<th><span class="sr-only">Smazat</span></th>' +
+      '<th class="del">Smazat</th>' +
       '</tr></thead><tbody>' + body + empty + '</tbody></table>';
   }
 
@@ -178,6 +237,7 @@ var Sim = (function () {
       sliderHTML('sim-hours', 'Pracovní doba', HOURS, state.hours, ' h') +
       sliderHTML('sim-irr', 'Sluneční záření', IRR, state.irradiation, '') +
       '<button type="button" class="primary run" id="run">Spustit simulaci</button>' +
+      '<p class="sim-note">Simulace ukazuje výrobu nejvýše za 2 hodiny.</p>' +
       '</div>' +
       '<div id="table-wrap">' + tableHTML() + '</div>';
   }

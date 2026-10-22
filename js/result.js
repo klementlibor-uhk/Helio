@@ -1,5 +1,5 @@
 'use strict';
-/* Závěr testu: potvrzení odevzdání, výsledek, prohlížení odpovědí a tisk do portfolia. */
+/* Závěr testu: potvrzovací okna, výsledek, prohlížení odpovědí a tisk do portfolia. */
 
 var Result = (function () {
 
@@ -10,30 +10,42 @@ var Result = (function () {
     'Splátka bance'
   ];
 
-  var SOLUTIONS = [
-    '<strong>840 milionů.</strong> Přímý přístup mají kategorie Bez rizika (71 %) ' +
-    'a Základní (17 %), dohromady 88 %. Zbývá 12 %, a 12 % ze 7 000 milionů je 840 milionů.',
+  var ANSWER = ['840 milionů', 'Město B', 'Kamion s návěsem II', '15 257 zedů'];
 
-    '<strong>Město B.</strong> Při záření 6 kWh/m² vyrobí modul 1 litr za hodinu, tedy ' +
-    '8 litrů za den a 2 920 litrů za rok. Jako důkaz stačí označit libovolný řádek se ' +
-    'zářením 6. Ostatní města mají jiné záření: A má 4 (2 190 litrů za rok), C má 5 ' +
-    '(2 555 litrů) a D má 8 (3 650 litrů).',
-
-    '<strong>Kamion s návěsem II</strong> — vejde se do něj 27 modulů proti 24. Krabice ' +
-    'musí stát touto stranou nahoru, takže do výšky 300 cm jdou tři vrstvy po 95 cm. ' +
-    'Podél délky se krabice postaví rozměrem 159 cm: do návěsu 7,7 m jdou čtyři, ' +
-    'do návěsu 8,2 m pět. Objem mají oba kamiony stejný, rozhoduje rozdělení délky. ' +
-    'Malé krabice se vejdou do zbylého pruhu vedle velkých.',
-
-    '<strong>15 257 zedů.</strong> 29 200 hl je 2 920 000 litrů, krát 0,08 zedu dá ' +
-    '233 600 zedů ročně. Za 15 let je to 3 504 000 zedů, což je výše půjčky. Bance se ' +
-    'zaplatí o 4,5 % víc, tedy 3 661 680 zedů, a to děleno 240 měsíci vychází 15 257 zedů.'
+  /* Postup po krocích — v prohlížení odpovědí i na tiskové stránce. */
+  var STEPS = [
+    [
+      'Přímý přístup mají kategorie Bez rizika (71 %) a Základní (17 %).',
+      '71 % + 17 % = 88 % lidí přístup má.',
+      '100 % − 88 % = 12 % lidí přístup nemá.',
+      '12 % ze 7 000 milionů: 0,12 · 7 000 = <strong>840 milionů</strong>.'
+    ],
+    [
+      'Lucy má 2 920 litrů za rok. Rok má 365 dní: 2 920 : 365 = 8 litrů za den.',
+      'Modul pracuje 8 hodin denně: 8 : 8 = 1 litr za hodinu.',
+      'V simulaci nastav 1 hodinu a hledej, při kterém záření vyjde 1 litr — je to záření 6.',
+      'Na mapě má barvu odpovídající šestce <strong>město B</strong>.'
+    ],
+    [
+      'Značka „touto stranou nahoru“ drží krabici na výšku 95 cm, otáčet jde jen půdorys.',
+      'Do výšky 300 cm se vejdou 300 : 95 = 3 vrstvy.',
+      'Podél délky se krabice postaví rozměrem 159 cm: do 7,7 m jdou 4, do 8,2 m jich jde 5.',
+      'Kamion I: (4 + 4) · 3 = 24 modulů. Kamion II: (4 + 5) · 3 = <strong>27 modulů</strong>.',
+      'Objem mají oba stejný, rozhoduje rozdělení délky. Malé krabice se vejdou vedle velkých.'
+    ],
+    [
+      '29 200 hl je 2 920 000 litrů.',
+      '2 920 000 · 0,08 zedu = 233 600 zedů ročně.',
+      'Návratnost 15 let: 233 600 · 15 = 3 504 000 zedů — to je výše půjčky.',
+      'Bance se zaplatí o 4,5 % víc: 3 504 000 · 1,045 = 3 661 680 zedů.',
+      '20 let je 240 měsíců: 3 661 680 : 240 = <strong>15 257 zedů</strong>.'
+    ]
   ];
 
   var CHOICES = { I: 'Kamion s návěsem I', II: 'Kamion s návěsem II',
                   stejne: 'Oba typy jsou stejně výhodné' };
 
-  /* ---------- pomocné ---------- */
+  /* ---------- body a stavy ---------- */
 
   function points() {
     var s = Scoring.score(answers);
@@ -42,7 +54,23 @@ var Result = (function () {
 
   function maxPoints() { return [1, 2, 1, 1]; }
 
-  /* Co je vyplněné — u otázky 2 a 3 má odpověď dvě části. */
+  function answered(i) {
+    if (i === 0) return !!String(answers.q1 || '').trim();
+    if (i === 1) return !!answers.q2town || Scoring.markedRows(answers.q2rows).length > 0;
+    if (i === 2) return !!answers.q3;
+    return !!String(answers.q4 || '').trim();
+  }
+
+  /* ok / part / bad / none — nevyplněná úloha se nemá tvářit jako špatná odpověď */
+  function status(i) {
+    if (!answered(i)) return { cls: 'none', label: 'Nezodpovězeno' };
+    var p = points()[i], max = maxPoints()[i];
+    if (p === max) return { cls: 'ok', label: 'Správně' };
+    if (p > 0) return { cls: 'part', label: 'Částečně' };
+    return { cls: 'bad', label: 'Nesprávně' };
+  }
+
+  /* Co je vyplněné jen zčásti — pro hlášku před odevzdáním. */
   function incomplete() {
     var out = [];
     if (!String(answers.q1 || '').trim()) out.push(0);
@@ -60,22 +88,37 @@ var Result = (function () {
     }).join('; ');
   }
 
-  /* Co žák odpověděl, lidsky. */
   function given(i) {
     if (i === 0) return answers.q1 ? esc(answers.q1) + ' milionů' : null;
     if (i === 1) {
-      if (!answers.q2town && !Scoring.markedRows(answers.q2rows).length) return null;
+      if (!answered(1)) return null;
       return 'město ' + esc(answers.q2town || '—') + ', označené řádky: ' + esc(markedList());
     }
-    if (i === 2) {
-      if (!answers.q3) return null;
-      return esc(CHOICES[answers.q3] || answers.q3);
-    }
-    if (i === 3) return answers.q4 ? esc(answers.q4) + ' zedů' : null;
-    return null;
+    if (i === 2) return answers.q3 ? esc(CHOICES[answers.q3] || answers.q3) : null;
+    return answers.q4 ? esc(answers.q4) + ' zedů' : null;
   }
 
-  /* ---------- potvrzení odevzdání ---------- */
+  /* ---------- okénka ---------- */
+
+  function dialog(title, text, yesLabel, noLabel, onYes) {
+    var back = document.createElement('div');
+    back.className = 'modal-back';
+    back.innerHTML = '<div class="modal" role="dialog" aria-modal="true" aria-labelledby="mt">' +
+      '<h2 id="mt">' + title + '</h2><p>' + text + '</p>' +
+      '<div class="modal-actions">' +
+      '<button data-modal="no">' + noLabel + '</button>' +
+      '<button class="primary" data-modal="yes">' + yesLabel + '</button>' +
+      '</div></div>';
+    back.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('[data-modal]') : null;
+      if (!b) return;
+      document.body.removeChild(back);
+      if (b.getAttribute('data-modal') === 'yes') onYes();
+    });
+    document.body.appendChild(back);
+    var yes = back.querySelector('[data-modal="yes"]');
+    if (yes) yes.focus();
+  }
 
   function confirmSubmit(onYes) {
     var missing = incomplete();
@@ -83,26 +126,116 @@ var Result = (function () {
       ? 'V ' + missing.length + ' ze 4 úloh chybí odpověď nebo její část. ' +
         'Chceš test přesto odevzdat?'
       : 'Všechny úlohy máš vyplněné. Po odevzdání už odpovědi nepůjde měnit.';
+    dialog('Odevzdat test?', text, 'Odevzdat', 'Vrátit se k testu', onYes);
+  }
 
-    var back = document.createElement('div');
-    back.className = 'modal-back';
-    back.innerHTML = '<div class="modal" role="dialog" aria-modal="true" aria-labelledby="mt">' +
-      '<h2 id="mt">Odevzdat test?</h2><p>' + text + '</p>' +
-      '<div class="modal-actions">' +
-      '<button data-modal="no">Vrátit se k testu</button>' +
-      '<button class="primary" data-modal="yes">Odevzdat</button>' +
-      '</div></div>';
+  function confirmRestart(onYes) {
+    dialog('Začít znovu?',
+      'Test se spustí od začátku a o všechny dosavadní odpovědi přijdeš. Nic se neukládá, ' +
+      'takže je nepůjde vrátit.', 'Začít znovu', 'Zůstat tady', onYes);
+  }
 
-    back.addEventListener('click', function (e) {
-      var b = e.target.closest ? e.target.closest('[data-modal]') : null;
-      if (!b) return;
-      document.body.removeChild(back);
-      if (b.getAttribute('data-modal') === 'yes') onYes();
-    });
+  function confirmHome(onYes) {
+    dialog('Odejít na úvodní stránku?',
+      'Odchodem se test zavře a všechny odpovědi se ztratí. Nic se neukládá, ' +
+      'takže je nepůjde vrátit.', 'Odejít', 'Zůstat tady', onYes);
+  }
 
-    document.body.appendChild(back);
-    var yes = back.querySelector('[data-modal="yes"]');
-    if (yes) yes.focus();
+  /* ---------- obrázky k postupu ---------- */
+
+  function figure(i) {
+    if (i === 0) {
+      return '<svg viewBox="0 0 360 120" width="100%" role="img" ' +
+        'aria-label="Pás rozdělený na 71, 17 a 12 procent; prvních 88 procent má přímý přístup.">' +
+        '<rect x="20" y="44" width="213" height="32" fill="#14558C"></rect>' +
+        '<rect x="233" y="44" width="51" height="32" fill="#5B9BD5"></rect>' +
+        '<rect x="284" y="44" width="36" height="32" fill="#E0A33A"></rect>' +
+        '<text x="126" y="65" font-size="13" fill="#fff" text-anchor="middle">71 %</text>' +
+        '<text x="258" y="65" font-size="13" fill="#0A3A63" text-anchor="middle">17 %</text>' +
+        '<text x="302" y="65" font-size="13" fill="#4A3005" text-anchor="middle">12 %</text>' +
+        '<path d="M20 36 V28 H284 V36" fill="none" stroke="#44566B" stroke-width="1.4"></path>' +
+        '<text x="152" y="20" font-size="13" fill="#162434" text-anchor="middle">88 % má přímý přístup</text>' +
+        '<path d="M302 84 V96" stroke="#9A2727" stroke-width="1.4"></path>' +
+        '<text x="320" y="110" font-size="13" fill="#9A2727" text-anchor="end">12 % nemá = 840 milionů</text>' +
+        '</svg>';
+    }
+    if (i === 1) {
+      var sc = ['#2E3BC8', '#7B86D8', '#0A8A2A', '#7BD44F', '#FFE93B',
+                '#F5A623', '#E8701A', '#E8231A', '#6B1A3A'];
+      var strip = sc.map(function (c, n) {
+        var on = n === 6;
+        return '<rect x="' + (20 + n * 30) + '" y="78" width="30" height="22" fill="' + c + '"></rect>' +
+          (on ? '<rect x="' + (20 + n * 30) + '" y="78" width="30" height="22" fill="none" ' +
+                'stroke="#162434" stroke-width="3"></rect>' : '') +
+          '<text x="' + (35 + n * 30) + '" y="94" font-size="12" text-anchor="middle" fill="' +
+          (n === 4 || n === 5 || n === 3 ? '#162434' : '#fff') + '">' + n + '</text>';
+      }).join('');
+      return '<svg viewBox="0 0 360 120" width="100%" role="img" ' +
+        'aria-label="Řetězec přepočtu a barevná škála se zvýrazněnou šestkou.">' +
+        '<text x="20" y="26" font-size="13" fill="#162434">2 920 l za rok</text>' +
+        '<path d="M108 21 H140" stroke="#1C6EB4" stroke-width="1.4"></path>' +
+        '<path d="M140 21 l-7 -3 v6 Z" fill="#1C6EB4" transform="rotate(180 140 21)"></path>' +
+        '<text x="124" y="14" font-size="11" fill="#14558C" text-anchor="middle">: 365</text>' +
+        '<text x="148" y="26" font-size="13" fill="#162434">8 l za den</text>' +
+        '<path d="M214 21 H246" stroke="#1C6EB4" stroke-width="1.4"></path>' +
+        '<path d="M246 21 l-7 -3 v6 Z" fill="#1C6EB4" transform="rotate(180 246 21)"></path>' +
+        '<text x="230" y="14" font-size="11" fill="#14558C" text-anchor="middle">: 8 h</text>' +
+        '<text x="254" y="26" font-size="13" fill="#162434" font-weight="600">1 l za hodinu</text>' +
+        '<text x="20" y="58" font-size="13" fill="#162434">V simulaci dá 1 litr za hodinu záření 6:</text>' +
+        strip +
+        '<text x="296" y="94" font-size="13" fill="#14558C" font-weight="600">= město B</text>' +
+        '</svg>';
+    }
+    if (i === 2) {
+      function floorPlan(y, label, lens, counts) {
+        var out = '<text x="0" y="' + (y - 6) + '" font-size="12" fill="#162434">' + label + '</text>';
+        var x = 60;
+        lens.forEach(function (len, k) {
+          var w = Math.round(len * 18);
+          out += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="46" ' +
+            'fill="#EEF5FB" stroke="#14558C" stroke-width="1.4"></rect>';
+          for (var b = 0; b < counts[k]; b++) {
+            out += '<rect x="' + (x + 2 + b * 29) + '" y="' + (y + 2) + '" width="28" height="30" ' +
+              'fill="#8A1E2B" stroke="#4A1018"></rect>';
+          }
+          out += '<text x="' + (x + w / 2) + '" y="' + (y + 60) + '" font-size="11" ' +
+            'text-anchor="middle" fill="#44566B">' + String(len).replace('.', ',') + ' m — ' +
+            counts[k] + ' krabice</text>';
+          x += w + 10;
+        });
+        return out;
+      }
+      return '<svg viewBox="0 0 360 180" width="100%" role="img" ' +
+        'aria-label="Půdorys ložných ploch: kamion I pojme 4 a 4 krabice, kamion II 4 a 5.">' +
+        floorPlan(20, 'Kamion I', [7.7, 7.7], [4, 4]) +
+        floorPlan(110, 'Kamion II', [7.3, 8.2], [4, 5]) +
+        '<text x="0" y="176" font-size="12" fill="#162434">' +
+        '8 · 3 vrstvy = 24 modulů        9 · 3 vrstvy = 27 modulů</text>' +
+        '</svg>';
+    }
+    var rows = [
+      ['29 200 hl', '= 2 920 000 l'],
+      ['· 0,08 zedu', '= 233 600 zedů ročně'],
+      ['· 15 let', '= 3 504 000 zedů (půjčka)'],
+      ['· 1,045', '= 3 661 680 zedů bance'],
+      [': 240 měsíců', '= 15 257 zedů měsíčně']
+    ];
+    var body = rows.map(function (r, n) {
+      var y = 20 + n * 24;
+      return '<text x="20" y="' + y + '" font-size="13" fill="#14558C" text-anchor="end" ' +
+        'transform="translate(100 0)">' + r[0] + '</text>' +
+        '<text x="130" y="' + y + '" font-size="13" fill="#162434"' +
+        (n === 4 ? ' font-weight="600"' : '') + '>' + r[1] + '</text>';
+    }).join('');
+    return '<svg viewBox="0 0 360 140" width="100%" role="img" ' +
+      'aria-label="Pět kroků výpočtu měsíční splátky.">' + body +
+      '<path d="M125 8 V128" stroke="#A9CBE8" stroke-width="1.4"></path></svg>';
+  }
+
+  function stepsHTML(i) {
+    return '<ol class="sol-steps">' + STEPS[i].map(function (s) {
+      return '<li>' + s + '</li>';
+    }).join('') + '</ol>';
   }
 
   /* ---------- výsledek ---------- */
@@ -112,30 +245,25 @@ var Result = (function () {
     var total = p.reduce(function (a, b) { return a + b; }, 0);
     var maxTotal = max.reduce(function (a, b) { return a + b; }, 0);
     var pct = Math.round(total / maxTotal * 1000) / 10;
-    var name = Profile.read();
 
     var list = TITLES.map(function (t, i) {
-      var ok = p[i] === max[i];
-      var part = p[i] > 0 && p[i] < max[i];
-      var label = ok ? 'Správně' : (part ? 'Částečně' : 'Nesprávně');
-      var cls = ok ? 'ok' : (part ? 'part' : 'bad');
+      var st = status(i);
       return '<li><button type="button" data-action="review" data-q="' + i + '">' +
         '<span class="n">' + (i + 1) + '</span>' +
         '<span class="t">' + t + '</span>' +
-        '<span class="badge ' + cls + '">' + label + '</span>' +
+        '<span class="badge ' + st.cls + '">' + st.label + '</span>' +
         '<span class="pts">' + p[i] + '/' + max[i] + '</span></button></li>';
     }).join('');
 
     return '<div class="result">' +
       '<p class="eyebrow">Pitná voda — výsledek</p>' +
       '<h1>' + Scoring.grade(total) + '</h1>' +
-      (name ? '<p class="who">' + esc(name) + '</p>' : '') +
       '<div class="score-row">' +
       '<div class="score"><strong>' + total + ' / ' + maxTotal + '</strong><span>získaných bodů</span></div>' +
       '<div class="score"><strong>' + String(pct).replace('.', ',') + ' %</strong><span>úspěšnost</span></div>' +
       '<div class="score"><strong>' + formatTime(elapsed) + '</strong><span>čas řešení</span></div>' +
       '</div>' +
-      '<p class="hint">Klikni na úlohu a prohlédni si svou odpověď i vysvětlení.</p>' +
+      '<p class="hint">Klikni na úlohu a prohlédni si svou odpověď i postup řešení.</p>' +
       '<ul class="qlist">' + list + '</ul>' +
       '<div class="result-actions">' +
       '<button class="primary" data-action="portfolio">Vytiskni své odpovědi</button>' +
@@ -147,11 +275,12 @@ var Result = (function () {
   /* ---------- vysvětlení pod otázkou v prohlížení ---------- */
 
   function solutionHTML(i) {
-    var p = points()[i], max = maxPoints()[i];
+    var st = status(i);
     var g = given(i);
     return '<div class="solution">' +
-      '<p class="sol-head">Správná odpověď <span class="pts">' + p + '/' + max + ' bodu</span></p>' +
-      '<p>' + SOLUTIONS[i] + '</p>' +
+      '<p class="sol-head">Správná odpověď: ' + ANSWER[i] +
+      '<span class="pts">' + points()[i] + '/' + maxPoints()[i] + ' bodu · ' + st.label + '</span></p>' +
+      stepsHTML(i) +
       '<p class="sol-given">Tvoje odpověď: ' + (g || '<em>bez odpovědi</em>') + '</p>' +
       (i === 2 && answers.q3text
         ? '<p class="sol-given">Tvoje vysvětlení: ' + esc(answers.q3text) +
@@ -166,31 +295,30 @@ var Result = (function () {
     var p = points(), max = maxPoints();
     var total = p.reduce(function (a, b) { return a + b; }, 0);
     var maxTotal = max.reduce(function (a, b) { return a + b; }, 0);
-    var name = Profile.read();
     var date = new Date().toLocaleDateString('cs-CZ');
 
     var items = TITLES.map(function (t, i) {
-      var ok = p[i] === max[i];
-      var part = p[i] > 0 && p[i] < max[i];
-      var cls = ok ? 'ok' : (part ? 'part' : 'bad');
-      var label = ok ? 'Správně' : (part ? 'Částečně' : 'Nesprávně');
+      var st = status(i);
       var g = given(i);
       return '<section class="pf-item">' +
         '<h2>' + (i + 1) + '. ' + t +
-        ' <span class="badge ' + cls + '">' + label + ' · ' + p[i] + '/' + max[i] + '</span></h2>' +
+        ' <span class="badge ' + st.cls + '">' + st.label + ' · ' + p[i] + '/' + max[i] + '</span></h2>' +
         '<p class="pf-given"><span>Moje odpověď:</span> ' + (g || '<em>bez odpovědi</em>') + '</p>' +
         (i === 2 && answers.q3text
           ? '<p class="pf-given"><span>Moje vysvětlení:</span> ' + esc(answers.q3text) + '</p>'
           : '') +
-        '<p class="pf-sol">' + SOLUTIONS[i] + '</p>' +
-        '</section>';
+        '<div class="pf-sol"><strong>Správná odpověď: ' + ANSWER[i] + '</strong>' +
+        stepsHTML(i) +
+        '<div class="pf-fig">' + figure(i) + '</div>' +
+        '</div></section>';
     }).join('');
 
     return '<div class="portfolio">' +
       '<p class="eyebrow">Moje práce do portfolia</p>' +
       '<h1>Pitná voda</h1>' +
-      '<p class="meta">' + (name ? esc(name) + ' · ' : '') + total + ' z ' + maxTotal +
-      ' bodů · čas řešení ' + formatTime(elapsed) + ' · ' + date + '</p>' +
+      '<p class="meta">' + total + ' z ' + maxTotal + ' bodů · čas řešení ' +
+      formatTime(elapsed) + ' · ' + date + '</p>' +
+      '<p class="nameline">Jméno: <span class="fill-line"></span></p>' +
       '<p class="hint no-print">Stránka je připravená k tisku. V tiskovém okně můžeš vypnout ' +
       'záhlaví a zápatí prohlížeče.</p>' +
       items + '</div>';
@@ -198,10 +326,13 @@ var Result = (function () {
 
   return {
     confirmSubmit: confirmSubmit,
+    confirmRestart: confirmRestart,
+    confirmHome: confirmHome,
     resultHTML: resultHTML,
     solutionHTML: solutionHTML,
     portfolioHTML: portfolioHTML,
     incomplete: incomplete,
+    status: status,
     given: given
   };
 })();

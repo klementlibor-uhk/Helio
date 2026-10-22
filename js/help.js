@@ -22,7 +22,7 @@ var Help = (function () {
     pin: '<svg viewBox="0 0 30 26" width="30" height="26"><rect width="30" height="26" rx="3" fill="#F5A623"/><circle cx="15" cy="14" r="5" fill="#fff" stroke="#185FA5" stroke-width="3"/><text x="15" y="8" font-size="8" text-anchor="middle" fill="#1A1A1A" font-family="sans-serif">B</text></svg>',
     slider: '<svg viewBox="0 0 60 20" width="60" height="20"><path d="M3 12 h54" stroke="#B9C6D4" stroke-width="4" stroke-linecap="round"/><circle cx="34" cy="12" r="7" fill="#2E6DB4"/><text x="3" y="6" font-size="7" fill="#5F5E5A" font-family="sans-serif">0</text><text x="50" y="6" font-size="7" fill="#5F5E5A" font-family="sans-serif">8</text></svg>',
     star: '<svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 3 l2.6 5.6 6 .8 -4.4 4.3 1.1 6.1 -5.3 -2.9 -5.3 2.9 1.1 -6.1 -4.4 -4.3 6 -.8 Z" fill="#639922"/></svg>',
-    minus: '<svg viewBox="0 0 24 24" width="22" height="22"><circle cx="12" cy="12" r="9" fill="none" stroke="#A32D2D" stroke-width="2"/><path d="M8 12 h8" stroke="#A32D2D" stroke-width="2.4"/></svg>',
+    minus: '<svg viewBox="0 0 22 22" width="22" height="22"><circle cx="11" cy="11" r="9.5" fill="#C62828"/><path d="M7.5 7.5 L14.5 14.5 M14.5 7.5 L7.5 14.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>',
     play: '<svg viewBox="0 0 24 24" width="22" height="22"><circle cx="12" cy="12" r="10" fill="#2E6DB4"/><path d="M10 8 l6 4 -6 4 Z" fill="#fff"/></svg>'
   };
 
@@ -73,9 +73,9 @@ var Help = (function () {
       row(ICON.play, 'Spustit simulaci', 'Přidá do tabulky řádek s naměřenou hodnotou. ' +
         'Spouštět můžeš opakovaně s různým nastavením. Šipka na obrázku modulu přehraje, ' +
         'jak voda vzniká.') +
-      row(ICON.star, 'Označ řádek s daty', 'Klikni na hvězdičku vlevo od řádku. Označený ' +
+      row(ICON.star, 'Označ řádek s daty (hvězdička ve sloupci Označ)', 'Klikni na hvězdičku vlevo od řádku. Označený ' +
         'řádek zezelená. Dalším kliknutím označení zrušíš.') +
-      row(ICON.minus, 'Smaž řádek', 'Klikni na červené tlačítko vpravo. Smazání se nedá ' +
+      row(ICON.minus, 'Smaž řádek (červené kolečko s křížkem)', 'Klikni na červené tlačítko vpravo. Smazání se nedá ' +
         'vzít zpět, ale stejná data získáš opakováním simulace se stejným nastavením.') +
       '</section>' +
 
