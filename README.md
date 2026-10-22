@@ -20,6 +20,8 @@ Otevři `index.html` v prohlížeči. Žádný build ani server není potřeba.
 - `js/simulation.js` — otázka 2: mapa Zedlandu, simulace a tabulka
 - `js/test.js` — režimy, navigace, časomíra
 - `js/result.js` — výsledek, prohlížení odpovědí a tisk do portfolia
+- `js/calculator.js` — kalkulačka s českým zápisem (vlastní parser, žádné eval)
+- `js/help.js` — nápověda pod otazníkem
 - `img/` — kresby (modul, farma, krabice, kamiony, mapa)
 - `docs/` — podklady a poznámky k zadání
 
@@ -42,4 +44,5 @@ záložky prohlížeče, odpovědi jen v paměti stránky. Žádné cookies, ž�
 
 Hotovo: úvodní obrazovka, všechny čtyři otázky, potvrzení odevzdání, výsledková
 obrazovka, prohlížení odpovědí s vysvětlením a tisk do portfolia.
-Připravuje se: nápověda pod otazníkem a kalkulačka s českými znaky.
+Test je obsahově kompletní. Zbývá pilotáž a rozhodnutí o zveřejnění přes GitHub Pages
+(k tomu je potřeba repozitář přepnout na veřejný).

@@ -32,13 +32,15 @@ var Engine = (function () {
   function footerHTML() {
     var last = page === QUESTIONS.length - 1;
     if (mode === 'test') {
-      return '<button data-action="calc" disabled title="Kalkulačka se teprve staví">Kalkulačka</button>' +
+      return '<button data-action="calc">Kalkulačka</button>' +
+        '<button data-action="help" class="help-btn" title="Nápověda" aria-label="Nápověda">?</button>' +
         '<button class="spacer" data-action="prev"' + (page === 0 ? ' disabled' : '') + '>Zpět</button>' +
         '<button class="primary" data-action="' + (last ? 'submit' : 'next') + '">' +
         (last ? 'Odevzdat test' : 'Další otázka') + '</button>';
     }
     if (mode === 'review') {
-      return '<button data-action="calc" disabled>Kalkulačka</button>' +
+      return '<button data-action="calc">Kalkulačka</button>' +
+        '<button data-action="help" class="help-btn" title="Nápověda" aria-label="Nápověda">?</button>' +
         '<button class="spacer" data-action="prev"' + (page === 0 ? ' disabled' : '') + '>Zpět</button>' +
         '<button data-action="next"' + (last ? ' disabled' : '') + '>Další úloha</button>' +
         '<button class="primary" data-action="result">Zpět na výsledek</button>';
@@ -114,6 +116,8 @@ var Engine = (function () {
     else if (action === 'print') window.print();
     else if (action === 'home') location.href = 'index.html';
     else if (action === 'restart') location.reload();
+    else if (action === 'calc') Calculator.open();
+    else if (action === 'help') Help.open();
   }
 
   function tick() {
