@@ -39,7 +39,6 @@ záložky prohlížeče, odpovědi jen v paměti stránky. Žádné cookies, ž�
 
 ## Stav
 
-Hotovo: úvodní obrazovka, kostra testu, otázka 1, otázka 2 (mapa, simulace, tabulka
-s označováním řádků a animace modulu).
-Připravuje se: otázky 3 a 4, závěrečná obrazovka, prohlížení odpovědí, tisk do
-portfolia, nápověda a kalkulačka.
+Hotovo: úvodní obrazovka a všechny čtyři otázky.
+Připravuje se: závěrečná obrazovka s výsledkem, prohlížení odpovědí s vysvětlením,
+tisk do portfolia, nápověda a kalkulačka.

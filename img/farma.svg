@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-labelledby="t">
+  <title id="t">Farma Helio: skupiny modulů rozmístěné v kruzích na pobřežní krajině</title>
+  <rect width="320" height="200" fill="#D9C68C"/>
+  <path d="M224 0 H320 V58 L286 50 L258 32 L236 14 Z" fill="#5ECBD8"/>
+  <path d="M0 0 H224 L236 14 L258 32 L240 44 Q160 28 80 46 Q36 56 0 48 Z" fill="#C6B274"/>
+  <path d="M0 188 Q90 162 152 178 Q220 196 320 158" stroke="#EDE5CC" stroke-width="6" fill="none"/>
+  <path d="M80 118 L170 96 M170 96 L250 142 M80 118 L250 142" stroke="#C2B07A" stroke-width="1.6"/>
+  <ellipse cx="80" cy="118" rx="9" ry="4.5" fill="#9AA3AB"/>
+  <g fill="#C3CDD6" stroke="#8F9AA4" stroke-width="0.6">
+    <circle cx="104" cy="118" r="4"/><circle cx="99.4" cy="125.1" r="4"/><circle cx="87.4" cy="129.4" r="4"/>
+    <circle cx="72.6" cy="129.4" r="4"/><circle cx="60.6" cy="125.1" r="4"/><circle cx="56" cy="118" r="4"/>
+    <circle cx="60.6" cy="110.9" r="4"/><circle cx="72.6" cy="106.6" r="4"/><circle cx="87.4" cy="106.6" r="4"/><circle cx="99.4" cy="110.9" r="4"/>
+  </g>
+  <ellipse cx="170" cy="96" rx="8" ry="4" fill="#9AA3AB"/>
+  <g fill="#C3CDD6" stroke="#8F9AA4" stroke-width="0.6">
+    <circle cx="190" cy="96" r="3.6"/><circle cx="186.2" cy="101.9" r="3.6"/><circle cx="176.2" cy="105.5" r="3.6"/>
+    <circle cx="163.8" cy="105.5" r="3.6"/><circle cx="153.8" cy="101.9" r="3.6"/><circle cx="150" cy="96" r="3.6"/>
+    <circle cx="153.8" cy="90.1" r="3.6"/><circle cx="163.8" cy="86.5" r="3.6"/><circle cx="176.2" cy="86.5" r="3.6"/><circle cx="186.2" cy="90.1" r="3.6"/>
+  </g>
+  <ellipse cx="250" cy="142" rx="10" ry="5" fill="#9AA3AB"/>
+  <g fill="#C3CDD6" stroke="#8F9AA4" stroke-width="0.6">
+    <circle cx="276" cy="142" r="4.4"/><circle cx="271" cy="149.6" r="4.4"/><circle cx="258" cy="154.4" r="4.4"/>
+    <circle cx="242" cy="154.4" r="4.4"/><circle cx="229" cy="149.6" r="4.4"/><circle cx="224" cy="142" r="4.4"/>
+    <circle cx="229" cy="134.4" r="4.4"/><circle cx="242" cy="129.6" r="4.4"/><circle cx="258" cy="129.6" r="4.4"/><circle cx="271" cy="134.4" r="4.4"/>
+  </g>
+  <g fill="#C3CDD6" stroke="#8F9AA4" stroke-width="0.6">
+    <circle cx="42" cy="72" r="3"/><circle cx="56" cy="66" r="3"/><circle cx="30" cy="80" r="3"/>
+    <circle cx="296" cy="100" r="3.4"/><circle cx="302" cy="112" r="3.4"/>
+  </g>
+</svg>

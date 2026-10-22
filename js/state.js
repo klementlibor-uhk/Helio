@@ -38,3 +38,23 @@ function answerNumber(key, unit, label) {
     (unit ? '<span class="unit">' + unit + '</span>' : '') +
     '</div>';
 }
+
+/* Rozbalovací nabídka. */
+function answerSelect(key, label, options) {
+  var opts = options.map(function (o) {
+    return '<option value="' + o.value + '"' +
+      (answers[key] === o.value ? ' selected' : '') + '>' + o.text + '</option>';
+  }).join('');
+  return '<label class="select-label" for="' + key + '">' + label + '</label>' +
+    '<select id="' + key + '" data-answer="' + key + '"' + (finished ? ' disabled' : '') + '>' +
+    '<option value=""' + (answers[key] ? '' : ' selected') + '>Vyber jednu možnost</option>' +
+    opts + '</select>';
+}
+
+/* Volná odpověď textem. */
+function answerText(key, label, note) {
+  return '<label class="text-label" for="' + key + '">' + label + '</label>' +
+    '<textarea id="' + key + '" data-answer="' + key + '" rows="6"' +
+    (finished ? ' readonly' : '') + '>' + esc(answers[key] || '') + '</textarea>' +
+    (note ? '<p class="hint small">' + note + '</p>' : '');
+}

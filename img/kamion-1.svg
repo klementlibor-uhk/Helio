@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 84" role="img" aria-labelledby="t">
+  <title id="t">Kamion s navesem I: dva ulozne prostory po 7,7 metru</title>
+  <circle cx="32" cy="68" r="8" fill="#3A3A38"/><circle cx="32" cy="68" r="3.4" fill="#9A9A95"/>
+  <circle cx="119" cy="68" r="8" fill="#3A3A38"/><circle cx="119" cy="68" r="3.4" fill="#9A9A95"/>
+  <circle cx="143" cy="68" r="8" fill="#3A3A38"/><circle cx="143" cy="68" r="3.4" fill="#9A9A95"/>
+  <circle cx="206" cy="68" r="8" fill="#3A3A38"/><circle cx="206" cy="68" r="3.4" fill="#9A9A95"/>
+  <circle cx="289" cy="68" r="8" fill="#3A3A38"/><circle cx="289" cy="68" r="3.4" fill="#9A9A95"/>
+  <path d="M179 64 H192" stroke="#4A4A48" stroke-width="3"/>
+  <rect x="6" y="62" width="52" height="6" rx="2" fill="#1E4E86"/>
+  <path d="M8 62 V36 Q8 30 14 29 L26 27 L33 15 Q35 11 41 11 H54 Q58 11 58 15 V62 Z" fill="#2E6DB4"/>
+  <polygon points="30,28 36,16 52,16 52,28" fill="#CFE4F7"/>
+  <rect x="14" y="34" width="14" height="10" rx="2" fill="#CFE4F7"/>
+  <rect x="8" y="54" width="6" height="5" rx="1" fill="#FFD75E"/>
+  <rect x="64" y="16" width="115" height="50" rx="3" fill="#F7F9FB" stroke="#AEBECE"/>
+  <rect x="64" y="16" width="115" height="6" rx="3" fill="#2E6DB4"/>
+  <rect x="64" y="60" width="115" height="6" fill="#2E6DB4"/>
+  <rect x="64" y="52" width="115" height="4" fill="#CFE4F7"/>
+  <rect x="192" y="16" width="115" height="50" rx="3" fill="#F7F9FB" stroke="#AEBECE"/>
+  <rect x="192" y="16" width="115" height="6" rx="3" fill="#2E6DB4"/>
+  <rect x="192" y="60" width="115" height="6" fill="#2E6DB4"/>
+  <rect x="192" y="52" width="115" height="4" fill="#CFE4F7"/>
+  <path d="M70 41 H173" stroke="#185FA5" stroke-width="1.4"/>
+  <polygon points="70,41 77,38 77,44" fill="#185FA5"/>
+  <polygon points="173,41 166,38 166,44" fill="#185FA5"/>
+  <rect x="101" y="33" width="41" height="16" rx="3" fill="#F7F9FB"/>
+  <text x="121" y="45" font-size="12.5" text-anchor="middle" fill="#185FA5" font-family="sans-serif">7,7 m</text>
+  <path d="M198 41 H301" stroke="#185FA5" stroke-width="1.4"/>
+  <polygon points="198,41 205,38 205,44" fill="#185FA5"/>
+  <polygon points="301,41 294,38 294,44" fill="#185FA5"/>
+  <rect x="229" y="33" width="41" height="16" rx="3" fill="#F7F9FB"/>
+  <text x="249" y="45" font-size="12.5" text-anchor="middle" fill="#185FA5" font-family="sans-serif">7,7 m</text>
+  <path d="M0 77 H340" stroke="#D3D1C7" stroke-width="2"/>
+</svg>

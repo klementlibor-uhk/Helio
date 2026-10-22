@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175 168" role="img" aria-labelledby="t">
+  <title id="t">Malá přepravní krabice, 131 krát 56 krát 40 centimetrů, značka touto stranou nahoru</title>
+  <polygon points="20,99 36,88 122,88 106,99" fill="#EFE2BC" stroke="#4A1018" stroke-width="1.2"/>
+  <path d="M36 88 V96" stroke="#C9BC96" stroke-width="1.2"/>
+  <polygon points="106,99 122,88 122,114 106,125" fill="#6E1420" stroke="#4A1018" stroke-width="1.2"/>
+  <rect x="20" y="99" width="86" height="26" fill="#8A1E2B" stroke="#4A1018" stroke-width="1.2"/>
+  <rect x="52" y="104" width="15" height="17" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.3"/>
+  <path d="M56.5 118 V110 l-1.6 0 1.6 -3.4 1.6 3.4 Z" stroke="#1A1A1A" stroke-width="1.3" fill="#1A1A1A"/>
+  <path d="M62.5 118 V110 l-1.6 0 1.6 -3.4 1.6 3.4 Z" stroke="#1A1A1A" stroke-width="1.3" fill="#1A1A1A"/>
+  <path d="M20 136 H106 M20 132 V140 M106 132 V140" stroke="#5F5E5A" stroke-width="1.2"/>
+  <text x="63" y="152" font-size="12" text-anchor="middle" fill="#2C2C2A" font-family="sans-serif">131 cm</text>
+  <path d="M10 99 V125 M6 99 H14 M6 125 H14" stroke="#5F5E5A" stroke-width="1.2"/>
+  <text x="2" y="112" font-size="12" text-anchor="middle" fill="#2C2C2A" font-family="sans-serif" transform="rotate(-90 2 112)">40 cm</text>
+  <path d="M114 131 L130 120" stroke="#5F5E5A" stroke-width="1.2"/>
+  <text x="150" y="124" font-size="12" text-anchor="middle" fill="#2C2C2A" font-family="sans-serif">56 cm</text>
+</svg>

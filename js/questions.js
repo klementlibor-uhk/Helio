@@ -77,23 +77,53 @@ var QUESTIONS = [
     left: function () {
       return '<p class="eyebrow">Otázka 3 ze 4</p>' +
         '<p class="question">Do kterého typu kamionu se vejde více modulů Helio?</p>' +
-        placeholder('Rozbalovací nabídka a rámeček na vysvětlení se připravují.');
+        answerSelect('q3', 'Vyber jednu možnost:', [
+          { value: 'I', text: 'Kamion s návěsem I' },
+          { value: 'II', text: 'Kamion s návěsem II' },
+          { value: 'stejne', text: 'Oba typy jsou stejně výhodné' }
+        ]) +
+        answerText('q3text', 'Vysvětli svou odpověď.',
+          'Vysvětlení se neboduje. V přehledu odpovědí ho uvidíš vedle vzorového řešení.');
     },
     right: function () {
-      return placeholder('Kresby obou přepravních krabic s kótami a nákresy obou kamionů ' +
-        's délkou úložných prostorů se připravují.');
+      return '<p>Městský úřad se rozhodl vyřešit problémy s pitnou vodou výstavbou farmy ' +
+        'Helio, která se skládá z mnoha modulů. Jeden modul se veze ve dvou krabicích.</p>' +
+        '<div class="boxes">' +
+        '<img src="img/krabice-velka.svg" alt="Velká krabice 167 krát 159 krát 95 centimetrů.">' +
+        '<img src="img/krabice-mala.svg" alt="Malá krabice 131 krát 56 krát 40 centimetrů.">' +
+        '</div>' +
+        '<p class="hint">Obě krabice se musí vézt touto stranou nahoru.</p>' +
+        '<p class="figure-title trucks-title">Úložný prostor</p>' +
+        '<p class="truck-label">Kamion s návěsem I</p>' +
+        '<img class="truck" src="img/kamion-1.svg" ' +
+        'alt="Kamion s návěsem I: dva úložné prostory po 7,7 metru.">' +
+        '<p class="truck-label">Kamion s návěsem II</p>' +
+        '<img class="truck" src="img/kamion-2.svg" ' +
+        'alt="Kamion s návěsem II: úložné prostory 7,3 a 8,2 metru.">' +
+        '<p class="hint trucks-note">Oba typy mají úložný prostor široký 2,48 m, ' +
+        'vysoký 3,0 m, o celkovém objemu 115 m³.</p>';
     }
   },
   {
     code: 'PV4',
     left: function () {
       return '<p class="eyebrow">Otázka 4 ze 4</p>' +
+        '<p>Návratnost investice do farmy Helio s roční produkcí 29 200 hl pitné vody ' +
+        'a pevnou cenou pro občany 0,08 zedu za jeden litr je vypočítána na 15 let.</p>' +
+        '<p>Městský úřad si na celou investici vezme půjčku od banky. Bance celkem zaplatí ' +
+        'částku o 4,5 % vyšší, než byla půjčka, a bude ji splácet v pravidelných měsíčních ' +
+        'splátkách po dobu 20 let.</p>' +
+        '<hr class="sep-thin">' +
         '<p class="question">Jaká je jedna měsíční splátka, kterou je třeba platit bance?</p>' +
-        placeholder('Text o návratnosti investice a políčko na odpověď se připravují.');
+        answerNumber('q4', 'zedů');
     },
     right: function () {
-      return placeholder('Ilustrace farmy Helio a vysvětlivka pojmu návratnost investice ' +
-        'se připravují.');
+      return '<img class="farm" src="img/farma.svg" ' +
+        'alt="Farma Helio: skupiny modulů rozmístěné v kruzích na pobřežní krajině.">' +
+        '<p class="farm-text">Městský úřad se rozhodl vyřešit problémy s pitnou vodou ' +
+        've svém městě výstavbou farmy Helio. Farma se skládá z mnoha modulů.</p>' +
+        '<div class="note"><strong>Návratnost investice</strong> je doba, za kterou se ' +
+        'vložené peníze vrátí z výnosů.</div>';
     }
   }
 ];
