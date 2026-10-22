@@ -221,3 +221,109 @@ img.farm {
   border-radius: var(--radius);
 }
 .farm-text { margin: 12px 0; }
+
+/* ---------- režimy ---------- */
+
+.panels.single { grid-template-columns: 1fr; }
+.panels.single .panel-left { border-right: 0; }
+.panels.review .sim,
+.panels.review .town,
+.panels.review .mark,
+.panels.review .remove { pointer-events: none; }
+.panels.review .sim { opacity: 0.65; }
+.review-flag {
+  font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-mute); margin: 0 0 10px;
+}
+
+/* ---------- potvrzovací okno ---------- */
+
+.modal-back {
+  position: fixed; inset: 0; z-index: 10;
+  background: rgba(20, 28, 38, 0.45);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 22px 24px;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(20, 28, 38, 0.2);
+}
+.modal h2 { font-size: 18px; margin: 0 0 8px; }
+.modal p { font-size: 14px; margin: 0 0 18px; }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
+/* ---------- výsledek ---------- */
+
+.result, .portfolio { max-width: 720px; margin: 0 auto; }
+.result h1 { font-size: 26px; margin: 0 0 4px; }
+.result .who { font-size: 15px; color: var(--text-soft); margin: 0 0 16px; }
+
+.score-row { display: flex; gap: 12px; margin: 16px 0 20px; flex-wrap: wrap; }
+.score {
+  flex: 1 1 140px;
+  background: var(--surface-1);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+}
+.score strong { display: block; font-size: 24px; font-weight: 600; color: var(--blue-dark); }
+.score span { font-size: 12px; color: var(--text-soft); }
+
+.qlist { list-style: none; margin: 10px 0 0; padding: 0; }
+.qlist li { margin: 0 0 6px; }
+.qlist button {
+  width: 100%; height: auto; padding: 10px 12px;
+  display: flex; align-items: center; gap: 12px; text-align: left;
+}
+.qlist .n {
+  flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--blue-light); color: var(--blue-dark);
+  font-size: 12px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+}
+.qlist .t { flex: 1 1 auto; font-size: 14px; }
+.qlist .pts { flex: 0 0 auto; font-size: 13px; color: var(--text-soft); }
+
+.badge { font-size: 12px; padding: 2px 10px; border-radius: 20px; white-space: nowrap; }
+.badge.ok { background: #E5F2DA; color: #27500A; }
+.badge.part { background: #FAEEDA; color: #633806; }
+.badge.bad { background: #FBE4E4; color: #A32D2D; }
+
+.result-actions { display: flex; gap: 10px; margin: 24px 0 0; flex-wrap: wrap; }
+
+/* ---------- vysvětlení v prohlížení ---------- */
+
+.solution {
+  border-left: 3px solid #639922;
+  background: #F1F7E9;
+  border-radius: 0;
+  padding: 12px 14px;
+  margin: 18px 0 0;
+  font-size: 13px;
+}
+.solution p { margin: 0 0 8px; }
+.solution p:last-child { margin-bottom: 0; }
+.sol-head { font-weight: 600; color: #27500A; }
+.sol-head .pts { font-weight: 400; color: var(--text-soft); margin-left: 6px; }
+.sol-given { color: var(--text-soft); }
+
+/* ---------- portfolio ---------- */
+
+.portfolio h1 { margin: 0 0 4px; }
+.portfolio .meta { font-size: 13px; color: var(--text-soft); margin: 0 0 18px; }
+.pf-item { border-top: 1px solid var(--border); padding: 14px 0 4px; }
+.pf-item h2 { font-size: 15px; display: flex; align-items: center; gap: 10px; }
+.pf-given { font-size: 14px; margin: 0 0 6px; }
+.pf-given span { color: var(--text-soft); }
+.pf-sol { font-size: 13px; color: var(--text-soft); background: var(--surface-1);
+  border-radius: var(--radius); padding: 10px 12px; }
+
+@media print {
+  body { background: #fff; }
+  .app { max-width: none; border: 0; }
+  .topbar, .footer, .no-print { display: none !important; }
+  .panel { overflow: visible; padding: 0; }
+  .pf-item { break-inside: avoid; }
+}

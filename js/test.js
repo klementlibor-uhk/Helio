@@ -1,82 +1,144 @@
 'use strict';
-(function () {
-  var leftEl, rightEl, progressEl, clockEl, prevBtn, nextBtn, panelsEl;
+/* Řízení testu: režimy, navigace, časomíra. Závěrečné obrazovky má na starosti result.js. */
+
+var Engine = (function () {
+
+  var el = {};
+  var mode = 'test';   /* test | review | result | portfolio */
+  var timer = null;
+
+  function currentMode() { return mode; }
 
   function renderProgress() {
     var html = '';
     for (var i = 0; i < QUESTIONS.length; i++) {
-      var cls = i < page ? 'done' : (i === page ? 'now' : '');
+      var cls = (mode === 'test' && i < page) || mode !== 'test' ? 'done' : '';
+      if (i === page && mode !== 'result' && mode !== 'portfolio') cls = 'now';
       html += '<span class="' + cls + '"></span>';
     }
-    progressEl.innerHTML = html;
-    progressEl.setAttribute('aria-label', 'Otázka ' + (page + 1) + ' ze ' + QUESTIONS.length);
+    el.progress.innerHTML = html;
+    el.progress.setAttribute('aria-label', 'Otázka ' + (page + 1) + ' ze ' + QUESTIONS.length);
   }
 
   function bindAnswers() {
-    var fields = panelsEl.querySelectorAll('[data-answer]');
-    Array.prototype.forEach.call(fields, function (el) {
-      var save = function () { answers[el.getAttribute('data-answer')] = el.value; };
-      el.addEventListener('input', save);
-      el.addEventListener('change', save);
+    var fields = el.panels.querySelectorAll('[data-answer]');
+    Array.prototype.forEach.call(fields, function (f) {
+      var save = function () { answers[f.getAttribute('data-answer')] = f.value; };
+      f.addEventListener('input', save);
+      f.addEventListener('change', save);
     });
   }
 
-  function render() {
+  function footerHTML() {
+    var last = page === QUESTIONS.length - 1;
+    if (mode === 'test') {
+      return '<button data-action="calc" disabled title="Kalkulačka se teprve staví">Kalkulačka</button>' +
+        '<button class="spacer" data-action="prev"' + (page === 0 ? ' disabled' : '') + '>Zpět</button>' +
+        '<button class="primary" data-action="' + (last ? 'submit' : 'next') + '">' +
+        (last ? 'Odevzdat test' : 'Další otázka') + '</button>';
+    }
+    if (mode === 'review') {
+      return '<button data-action="calc" disabled>Kalkulačka</button>' +
+        '<button class="spacer" data-action="prev"' + (page === 0 ? ' disabled' : '') + '>Zpět</button>' +
+        '<button data-action="next"' + (last ? ' disabled' : '') + '>Další úloha</button>' +
+        '<button class="primary" data-action="result">Zpět na výsledek</button>';
+    }
+    if (mode === 'portfolio') {
+      return '<button class="spacer" data-action="result">Zpět na výsledek</button>' +
+        '<button class="primary" data-action="print">Vytisknout nebo uložit jako PDF</button>';
+    }
+    return '<button class="spacer" data-action="home">Zpět na úvodní stránku</button>';
+  }
+
+  /* Jedna otázka — v testu i v prohlížení odpovědí. */
+  function renderQuestion() {
     var q = QUESTIONS[page];
-    leftEl.innerHTML = q.left();
-    rightEl.innerHTML = q.right();
-    leftEl.scrollTop = 0;
-    rightEl.scrollTop = 0;
+    el.panels.className = 'panels' + (mode === 'review' ? ' review' : '');
+    el.right.hidden = false;
+    el.left.innerHTML = (mode === 'review' ? '<p class="review-flag">Prohlížení odpovědí</p>' : '') +
+      q.left() + (mode === 'review' ? Result.solutionHTML(page) : '');
+    el.right.innerHTML = q.right();
+    el.left.scrollTop = 0;
+    el.right.scrollTop = 0;
     bindAnswers();
     if (typeof q.mount === 'function') q.mount();
     renderProgress();
-    prevBtn.disabled = page === 0;
-    nextBtn.textContent = page === QUESTIONS.length - 1 ? 'Odevzdat test' : 'Další otázka';
+    el.footer.innerHTML = footerHTML();
   }
 
-  /* Provizorní závěr — skutečná výsledková obrazovka se teprve staví. */
-  function submit() {
-    finished = true;
-    var r = Scoring.score(answers);
-    leftEl.innerHTML = '<p class="eyebrow">Hotovo</p>' +
-      '<h2>' + Scoring.grade(r.total) + '</h2>' +
-      '<p>Získal jsi <strong>' + r.total + ' z ' + r.max + ' bodů</strong>.</p>' +
-      '<p class="hint">Čas řešení ' + formatTime(elapsed) + '.</p>';
-    rightEl.innerHTML = '<div class="placeholder">Výsledková obrazovka, prohlížení odpovědí ' +
-      's vysvětlením a tisk do portfolia se teprve staví. Tohle je jen provizorní shrnutí, ' +
-      'aby se dal test proklikat celý.</div>';
-    prevBtn.disabled = true;
-    nextBtn.disabled = true;
+  /* Celostránkový obsah — výsledek a tisk do portfolia. */
+  function renderWide(html) {
+    el.panels.className = 'panels single';
+    el.right.hidden = true;
+    el.right.innerHTML = '';
+    el.left.innerHTML = html;
+    el.left.scrollTop = 0;
+    renderProgress();
+    el.footer.innerHTML = footerHTML();
+  }
+
+  function setMode(next, index) {
+    mode = next;
+    if (typeof index === 'number') page = index;
+    if (mode === 'test' || mode === 'review') renderQuestion();
+    else if (mode === 'result') renderWide(Result.resultHTML());
+    else if (mode === 'portfolio') renderWide(Result.portfolioHTML());
   }
 
   function go(delta) {
-    if (page === QUESTIONS.length - 1 && delta > 0) { submit(); return; }
     page = Math.min(QUESTIONS.length - 1, Math.max(0, page + delta));
-    render();
+    renderQuestion();
+  }
+
+  function stopClock() {
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+
+  function finish() {
+    finished = true;
+    stopClock();
+    setMode('result');
+  }
+
+  function onFooterClick(e) {
+    var btn = e.target.closest ? e.target.closest('[data-action]') : null;
+    if (!btn || btn.disabled) return;
+    var action = btn.getAttribute('data-action');
+
+    if (action === 'prev') go(-1);
+    else if (action === 'next') go(1);
+    else if (action === 'submit') Result.confirmSubmit(finish);
+    else if (action === 'result') setMode('result');
+    else if (action === 'review') setMode('review', Number(btn.getAttribute('data-q')));
+    else if (action === 'portfolio') setMode('portfolio');
+    else if (action === 'print') window.print();
+    else if (action === 'home') location.href = 'index.html';
+    else if (action === 'restart') location.reload();
   }
 
   function tick() {
     elapsed += 1;
-    clockEl.textContent = formatTime(elapsed);
+    el.clock.textContent = formatTime(elapsed);
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    panelsEl = document.querySelector('.panels');
-    leftEl = document.getElementById('panel-left');
-    rightEl = document.getElementById('panel-right');
-    progressEl = document.getElementById('progress');
-    clockEl = document.getElementById('clock');
-    prevBtn = document.getElementById('prev');
-    nextBtn = document.getElementById('next');
+    el.panels = document.querySelector('.panels');
+    el.left = document.getElementById('panel-left');
+    el.right = document.getElementById('panel-right');
+    el.progress = document.getElementById('progress');
+    el.clock = document.getElementById('clock');
+    el.footer = document.getElementById('footer');
 
-    prevBtn.addEventListener('click', function () { go(-1); });
-    nextBtn.addEventListener('click', function () { go(1); });
+    el.footer.addEventListener('click', onFooterClick);
+    el.panels.addEventListener('click', onFooterClick);
 
     var name = Profile.read();
     if (name) document.getElementById('pupil').textContent = name;
 
-    clockEl.textContent = formatTime(0);
-    setInterval(tick, 1000);
-    render();
+    el.clock.textContent = formatTime(0);
+    timer = setInterval(tick, 1000);
+    setMode('test', 0);
   });
+
+  return { setMode: setMode, mode: currentMode, stopClock: stopClock, el: el };
 })();

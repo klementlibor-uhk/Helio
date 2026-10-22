@@ -18,7 +18,8 @@ Otevři `index.html` v prohlížeči. Žádný build ani server není potřeba.
 - `js/state.js` — stav odpovědí a pomocné funkce
 - `js/questions.js` — jednotlivé otázky
 - `js/simulation.js` — otázka 2: mapa Zedlandu, simulace a tabulka
-- `js/test.js` — navigace, časomíra, vykreslování
+- `js/test.js` — režimy, navigace, časomíra
+- `js/result.js` — výsledek, prohlížení odpovědí a tisk do portfolia
 - `img/` — kresby (modul, farma, krabice, kamiony, mapa)
 - `docs/` — podklady a poznámky k zadání
 
@@ -39,6 +40,6 @@ záložky prohlížeče, odpovědi jen v paměti stránky. Žádné cookies, ž�
 
 ## Stav
 
-Hotovo: úvodní obrazovka a všechny čtyři otázky.
-Připravuje se: závěrečná obrazovka s výsledkem, prohlížení odpovědí s vysvětlením,
-tisk do portfolia, nápověda a kalkulačka.
+Hotovo: úvodní obrazovka, všechny čtyři otázky, potvrzení odevzdání, výsledková
+obrazovka, prohlížení odpovědí s vysvětlením a tisk do portfolia.
+Připravuje se: nápověda pod otazníkem a kalkulačka s českými znaky.
