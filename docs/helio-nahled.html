@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Helio — náhled kresby</title>
+<link rel="stylesheet" href="../css/common.css">
+<link rel="stylesheet" href="../css/test.css">
+<style>
+  body { padding: 28px; }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  .row { display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap; margin: 24px 0 0; }
+  .box { background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+  .velky { width: 760px; max-width: 100%; }
+  .maly { width: 290px; }
+  .popis { font-size: 14px; color: var(--ink-soft); margin: 8px 0 0; }
+  .ovladani { display: flex; gap: 12px; align-items: center; margin: 20px 0 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Kontrolní náhled</p>
+  <h1>Kresba modulu Helio</h1>
+  <p class="hint">Vlevo ve velikosti na posouzení, vpravo tak, jak se opravdu zobrazí
+    v otázce 2. Tahle stránka není součástí testu, slouží jen k prohlížení kresby.</p>
+
+  <div class="ovladani">
+    <button class="primary" id="hrat">Přehrát animaci</button>
+    <span class="hint">Celý sled trvá 3,2 sekundy.</span>
+  </div>
+
+  <div class="row">
+    <div class="box velky" id="velky"></div>
+    <div>
+      <div class="box maly" id="maly"></div>
+      <p class="popis">Skutečná velikost v testu</p>
+    </div>
+  </div>
+</div>
+
+<script src="../js/helio.js"></script>
+<script>
+document.getElementById('velky').innerHTML = Helio.svg();
+document.getElementById('maly').innerHTML = Helio.svg().replace('id="helio-svg"', 'id="helio-maly"')
+  .replace(/id="ball"/g, 'id="ball2"').replace(/url\(#ball\)/g, 'url(#ball2)');
+
+document.getElementById('hrat').addEventListener('click', function () {
+  [document.getElementById('helio-svg'), document.getElementById('helio-maly')].forEach(function (s) {
+    if (!s) return;
+    s.classList.remove('playing');
+    void s.getBoundingClientRect();
+    s.classList.add('playing');
+  });
+});
+</script>
+</body>
+</html>
