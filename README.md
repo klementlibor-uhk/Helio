@@ -17,6 +17,7 @@ Otevři `index.html` v prohlížeči. Žádný build ani server není potřeba.
 - `js/scoring.js` — vyhodnocení; oddělené a spustitelné i v Node
 - `js/state.js` — stav odpovědí a pomocné funkce
 - `js/questions.js` — jednotlivé otázky
+- `js/simulation.js` — otázka 2: mapa Zedlandu, simulace a tabulka
 - `js/test.js` — navigace, časomíra, vykreslování
 - `img/` — kresby (modul, farma, krabice, kamiony, mapa)
 - `docs/` — podklady a poznámky k zadání
@@ -38,6 +39,7 @@ záložky prohlížeče, odpovědi jen v paměti stránky. Žádné cookies, ž�
 
 ## Stav
 
-Hotovo: úvodní obrazovka, kostra testu, otázka 1.
-Připravuje se: otázky 2–4, závěrečná obrazovka, prohlížení odpovědí, tisk do
+Hotovo: úvodní obrazovka, kostra testu, otázka 1, otázka 2 (mapa, simulace, tabulka
+s označováním řádků a animace modulu).
+Připravuje se: otázky 3 a 4, závěrečná obrazovka, prohlížení odpovědí, tisk do
 portfolia, nápověda a kalkulačka.

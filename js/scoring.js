@@ -17,9 +17,13 @@
 
   /* Otázka 2: označené řádky uznáme, jen když je aspoň jeden a všechny
      mají sluneční záření 6. Bez té podmínky by stačilo označit celou tabulku. */
+  function markedRows(rows) {
+    return (Array.isArray(rows) ? rows : []).filter(function (r) { return r && r.selected; });
+  }
+
   function evidenceOk(rows) {
-    if (!Array.isArray(rows) || rows.length === 0) return false;
-    return rows.every(function (r) { return Number(r.irradiation) === 6; });
+    var m = markedRows(rows);
+    return m.length > 0 && m.every(function (r) { return Number(r.irradiation) === 6; });
   }
 
   function score(a) {
@@ -40,7 +44,7 @@
     return 'Nevzdávej to, zkus úlohy znovu.';
   }
 
-  root.Scoring = { ids: ids, number: number, evidenceOk: evidenceOk, score: score, grade: grade };
+  root.Scoring = { ids: ids, number: number, markedRows: markedRows, evidenceOk: evidenceOk, score: score, grade: grade };
   if (typeof module !== 'undefined' && module.exports) module.exports = root.Scoring;
 
 })(typeof window === 'undefined' ? globalThis : window);

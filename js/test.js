@@ -28,6 +28,7 @@
     leftEl.scrollTop = 0;
     rightEl.scrollTop = 0;
     bindAnswers();
+    if (typeof q.mount === 'function') q.mount();
     renderProgress();
     prevBtn.disabled = page === 0;
     nextBtn.textContent = page === QUESTIONS.length - 1 ? 'Odevzdat test' : 'Další otázka';

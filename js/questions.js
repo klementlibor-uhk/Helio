@@ -68,15 +68,9 @@ var QUESTIONS = [
   },
   {
     code: 'PV2',
-    left: function () {
-      return '<p class="eyebrow">Otázka 2 ze 4</p>' +
-        '<p class="question">Ve kterém městě Lucy bydlí?</p>' +
-        placeholder('Mapa Zedlandu s výběrem města a barevná škála slunečního záření se připravují.');
-    },
-    right: function () {
-      return placeholder('Simulace modulu Helio: posuvníky pracovní doby a slunečního záření, ' +
-        'tlačítko Spustit a tabulka naměřených hodnot s označováním řádků.');
-    }
+    left: function () { return Sim.leftHTML(); },
+    right: function () { return Sim.rightHTML(); },
+    mount: function () { Sim.mount(); }
   },
   {
     code: 'PV3',
