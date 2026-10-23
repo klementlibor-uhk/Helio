@@ -26,16 +26,16 @@
 .intro-img svg { display: block; width: 100%; }
 
 .eyebrow {
-  font-size: 14px;
+  font-size: 0.824rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 600;
   color: var(--blue);
   margin: 0 0 10px;
 }
-.intro-card h1 { font-size: 52px; letter-spacing: -0.02em; margin: 0 0 8px; }
-.subtitle { font-size: 17px; color: var(--ink-soft); margin: 0 0 24px; }
-.lead { font-size: 21px; line-height: 1.6; margin: 0 0 38px; max-width: 28em; }
+.intro-card h1 { font-size: 3.059rem; letter-spacing: -0.02em; margin: 0 0 8px; }
+.subtitle { font-size: 1.000rem; color: var(--ink-soft); margin: 0 0 24px; }
+.lead { font-size: 1.235rem; line-height: 1.6; margin: 0 0 38px; max-width: 28em; }
 
 .start-row {
   display: flex;
@@ -43,8 +43,8 @@
   gap: 20px;
   flex-wrap: wrap;
 }
-button.big { height: 58px; font-size: 19px; padding: 0 38px; }
-.start-row .meta { font-size: 16px; color: var(--ink-soft); }
+button.big { height: 58px; font-size: 1.118rem; padding: 0 38px; }
+.start-row .meta { font-size: 0.941rem; color: var(--ink-soft); }
 
 .intro-foot {
   display: flex;
@@ -56,7 +56,7 @@ button.big { height: 58px; font-size: 19px; padding: 0 38px; }
 }
 .source {
   flex: 1 1 auto;
-  font-size: 12px;
+  font-size: 0.706rem;
   color: var(--ink-mute);
   line-height: 1.55;
   margin: 0;
@@ -72,7 +72,7 @@ button.big { height: 58px; font-size: 19px; padding: 0 38px; }
   padding: 6px 2px;
   border: 0;
   background: none;
-  font-size: 14px;
+  font-size: 0.824rem;
   font-weight: 500;
   color: var(--blue-700);
   white-space: nowrap;
@@ -84,8 +84,8 @@ button.big { height: 58px; font-size: 19px; padding: 0 38px; }
   .intro-card { padding: 34px 28px 22px; }
   .intro-head { flex-direction: column-reverse; gap: 28px; align-items: flex-start; }
   .intro-img { width: 260px; max-width: 70%; align-self: center; }
-  .intro-card h1 { font-size: 36px; }
-  .lead { font-size: 18px; }
+  .intro-card h1 { font-size: 2.118rem; }
+  .lead { font-size: 1.059rem; }
   .intro-foot { flex-direction: column-reverse; align-items: flex-start; gap: 14px; }
 }
 
@@ -107,3 +107,19 @@ button.big { height: 58px; font-size: 19px; padding: 0 38px; }
 /* Verze s popisky má širší výřez, takže kontejner musí být širší,
    aby samotná kresba byla větší než předtím, ne menší. */
 .intro-img { width: 940px; max-width: 58%; }
+
+/* ---------- verze 5 ---------- */
+/* Karta nemá být povinně přes celé okno; má být vyplněná. Obsah roste
+   s velikostí písma, takže se prázdná plocha zaplní sama. */
+.intro-page { align-items: center; }
+.intro-card {
+  min-height: min(86vh, 860px);
+  padding: 3.2em 3.4em 1.8em;
+}
+/* Sloupec: kresba, pod ní tlačítko animace. Zarovnání na střed se dává
+   jednotlivým prvkům, NE celému sloupci — jinak se obal kresby smrskne na
+   šířku obsahu, svg spadne na svých výchozích 300 bodů a kresba se zmenší. */
+.intro-img { display: flex; flex-direction: column; gap: 0.6em; }
+.intro-img > div { width: 100%; }
+.intro-img svg { width: 100%; }
+.play-anim { align-self: center; }

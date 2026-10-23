@@ -54,7 +54,9 @@ function chartAccess() {
 
   return '<p class="figure-title">Přístup k pitné vodě v roce 2015 <span class="unit-note">' +
     'podíl obyvatel světa v %</span></p>' +
-    '<svg viewBox="0 0 330 268" width="100%" style="max-width:430px;display:block" role="img" ' +
+    /* Mez v rem, ne v bodech: graf pak roste spolu s písmem, takže na vyšším
+       okně nezůstane malý uprostřed prázdné karty. */
+    '<svg viewBox="0 0 330 268" width="100%" style="max-width:26rem;display:block" role="img" ' +
     'aria-label="Skládaný sloupec: bez rizika 71 procent, základní 17, omezený přístup 4, ' +
     'neupravená 6, povrchová voda 2 procenta.">' +
     axis + bars + seams + leads + labels +
@@ -91,7 +93,12 @@ var QUESTIONS = [
   {
     code: 'PV3',
     left: function () {
+      /* Odstavec o městském úřadu je zadání, ne podklad — patří doleva.
+         Levý panel má pak stejnou stavbu jako otázka 1. */
       return '<p class="eyebrow">Otázka 3 ze 4</p>' +
+        '<p>Městský úřad se rozhodl vyřešit problémy s pitnou vodou výstavbou farmy ' +
+        'Helio, která se skládá z mnoha modulů. Jeden modul se veze ve dvou krabicích.</p>' +
+        '<hr class="sep-thin">' +
         '<p class="question">Do kterého typu kamionu se vejde více modulů Helio?</p>' +
         answerBlock(
           answerSelect('q3', [
@@ -104,19 +111,13 @@ var QUESTIONS = [
         );
     },
     right: function () {
-      return '<p>Městský úřad se rozhodl vyřešit problémy s pitnou vodou výstavbou farmy ' +
-        'Helio, která se skládá z mnoha modulů. Jeden modul se veze ve dvou krabicích.</p>' +
-        /* Krabice a kamiony vedle sebe, ne pod sebou — panel je široký a výšky
-           je málo. Obojí se tím může nakreslit výrazně větší. */
-        '<div class="q3-cols">' +
-        '<div class="q3-boxes">' +
-        '<div class="boxes">' +
+      /* Krabice nahoře, kamiony pod nimi, obojí přes celou šířku panelu.
+         Vešlo se to právě tím, že odstavec zadání přešel do levého panelu. */
+      return '<div class="boxes">' +
         '<img src="img/krabice-velka.svg" alt="Velká krabice 167 krát 159 krát 95 centimetrů.">' +
         '<img src="img/krabice-mala.svg" alt="Malá krabice 131 krát 56 krát 40 centimetrů.">' +
         '</div>' +
         '<p class="hint">Obě krabice se musí vézt touto stranou nahoru.</p>' +
-        '</div>' +
-        '<div class="q3-trucks">' +
         '<p class="figure-title trucks-title">Úložný prostor</p>' +
         '<p class="truck-label">Kamion s návěsem I</p>' +
         '<img class="truck" src="img/kamion-1.svg" ' +
@@ -125,8 +126,7 @@ var QUESTIONS = [
         '<img class="truck" src="img/kamion-2.svg" ' +
         'alt="Kamion s návěsem II: úložné prostory 7,3 a 8,2 metru.">' +
         '<p class="hint trucks-note">Oba typy mají úložný prostor široký 2,48 m, ' +
-        'vysoký 3,0 m, o celkovém objemu 115 m³.</p>' +
-        '</div></div>';
+        'vysoký 3,0 m, o celkovém objemu 115 m³.</p>';
     }
   },
   {

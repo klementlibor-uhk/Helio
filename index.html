@@ -6,6 +6,7 @@
 <title>Pitná voda</title>
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/overlay.css">
+<link rel="stylesheet" href="css/helio.css">
 <link rel="stylesheet" href="css/intro.css">
 </head>
 <body>
@@ -25,7 +26,10 @@
         </div>
       </div>
 
-      <div class="intro-img" id="helio-slot"></div>
+      <div class="intro-img">
+        <div id="helio-slot"></div>
+        <button type="button" class="play-anim" id="play-anim">Přehraj animaci</button>
+      </div>
     </div>
 
     <div class="intro-foot">
@@ -48,6 +52,14 @@
 <script src="js/helio.js"></script>
 <script>
 document.getElementById('helio-slot').innerHTML = Helio.svg('', { popisky: true });
+
+document.getElementById('play-anim').addEventListener('click', function () {
+  var s = document.getElementById('helio-svg');
+  if (!s) return;
+  s.classList.remove('playing');
+  void s.getBoundingClientRect();
+  s.classList.add('playing');
+});
 
 document.getElementById('start').addEventListener('click', function () {
   location.href = 'test.html';

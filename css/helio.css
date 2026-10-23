@@ -1,0 +1,46 @@
+/* Animace vzniku vody v modulu Helio (3,2 s).
+   Kresba je společná pro úvodní stránku i otázku 2, takže i její animace
+   musí být ve vlastním souboru, který načítají OBĚ stránky. Dokud byla jen
+   v test.css, tlačítko „Přehraj animaci“ na úvodní stránce nic nedělalo —
+   přesně jako kdysi kalkulačka a okénka, než vznikl overlay.css.
+
+   Pořadí fází: slunce rozsvítí panel → čerpadlo přižene mořskou vodu do
+   vaničky → odpařování a pára → kondenzace na stěně → kapky stékají na dno
+   → odtok ven. */
+
+.helio .vapor, .helio .drops, .helio .spark, .helio .drop { transform-box: view-box; }
+.helio .flow-in, .helio .flow-out { stroke-dashoffset: 0; }
+
+.helio.playing .spark    { animation: h-spark 3.2s ease-out; }
+.helio.playing .flow-in  { animation: h-in 3.2s linear; }
+.helio.playing .vapor    { animation: h-vapor 3.2s ease-out; }
+.helio.playing .drops    { animation: h-drops 3.2s ease-out; }
+.helio.playing .drop-a   { animation: h-run-a 3.2s ease-in; }
+.helio.playing .drop-b   { animation: h-run-b 3.2s ease-in; }
+.helio.playing .drop-c   { animation: h-run-c 3.2s ease-in; }
+.helio.playing .flow-out { animation: h-out 3.2s linear; }
+
+@keyframes h-spark { 0% { opacity: 0.25 } 10%, 100% { opacity: 1 } }
+@keyframes h-in    { 0% { stroke-dashoffset: 300 } 40%, 100% { stroke-dashoffset: 0 } }
+@keyframes h-vapor { 0%, 26% { opacity: 0 } 48%, 100% { opacity: 1 } }
+@keyframes h-drops { 0%, 46% { opacity: 0 } 64%, 100% { opacity: 1 } }
+@keyframes h-run-a {
+  0%, 58% { opacity: 0; transform: translate(0, 0); }
+  64% { opacity: 1; }
+  92%, 100% { opacity: 1; transform: translate(-4px, 70px); }
+}
+@keyframes h-run-b {
+  0%, 64% { opacity: 0; transform: translate(0, 0); }
+  70% { opacity: 1; }
+  96%, 100% { opacity: 1; transform: translate(5px, 74px); }
+}
+@keyframes h-run-c {
+  0%, 70% { opacity: 0; transform: translate(0, 0); }
+  76% { opacity: 1; }
+  100% { opacity: 1; transform: translate(-2px, 44px); }
+}
+@keyframes h-out   { 0%, 72% { stroke-dashoffset: 200 } 100% { stroke-dashoffset: 0 } }
+
+@media (prefers-reduced-motion: reduce) {
+  .helio.playing * { animation: none !important; }
+}

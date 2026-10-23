@@ -18,8 +18,14 @@
   <!-- obloha, slunce -->
   <rect width="360" height="220" fill="#EAF4FB"/>
   <circle cx="312" cy="26" r="15" fill="#FFCE3A"/>
+  <!-- paprsky kolem dokola, vcetne smeru dolu k farme -->
   <g stroke="#F2A81D" stroke-width="2" stroke-linecap="round">
-    <path d="M312 4 V0"/><path d="M290 26 H286"/><path d="M296 10 L293 7"/><path d="M328 10 L331 7"/>
+    <path d="M312 4 V0"/><path d="M290 26 H286"/><path d="M334 26 H338"/><path d="M312 48 V52"/>
+    <path d="M297 11 L294 8"/><path d="M327 11 L330 8"/><path d="M297 41 L294 44"/><path d="M327 41 L330 44"/>
+  </g>
+  <!-- delsi paprsky dopadajici na farmu -->
+  <g stroke="#F2A81D" stroke-width="1.8" stroke-dasharray="5 4" opacity="0.9">
+    <path d="M300 38 L252 118"/><path d="M308 42 L196 96"/>
   </g>
 
   <!-- moře vlevo -->

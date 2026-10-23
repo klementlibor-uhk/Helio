@@ -37,6 +37,12 @@ rovnou při 100 %.** Nejde tedy o větší rám, ale o větší obsah v něm.
 ## 2. Úvodní stránka
 
 6. Obsah poroste s kartou, takže ji vyplní. Karta smí být i o něco menší než teď.
+6b. **Animace i na úvodní stránce**, spouštěná kliknutím na pojmenované tlačítko
+    „Přehraj animaci“ pod obrázkem (ne holou šipkou jako v otázce 2). Kresba je
+    tatáž ze stejného zdroje, takže jde jen o tlačítko a pár řádků.
+    Na úvodní stránce je kresba velká, má popisky a nikdo netlačí na čas — je to
+    nejlepší místo, kde princip Helia pochopit. Nic to neprozrazuje, princip je
+    podklad, ne řešení. Ohled na „omezit pohyb“ je ošetřený z dřívějška.
 7. **Paprsky od slunce jsou rozbité.** Dnes jsou tři různé: k panelu čárkovaný
    (správně), ke kouli plný se šipkou, k zrcadlu čárkovaný, ale nezačíná u slunce.
    Navíc je tam čtvrtý, plný, od zrcadla vzhůru do koule.
@@ -81,6 +87,37 @@ rovnou při 100 %.** Nejde tedy o větší rám, ale o větší obsah v něm.
 
 ## Otevřené z minula
 
+- Výška tabulky u otázky 2 — kolik řádků má být vidět naráz?
+- Orientace obrázku u úlohy 1 v tisku — naležato, nebo nastojato?
+- Repozitář je privátní; pro GitHub Pages ho bude potřeba přepnout na veřejný.
+
+## Co se udělalo (23. 10. 2026)
+
+Všech 16 bodů je zapracováno. Při měření a prohlížení snímků se našly ještě tři
+věci, které body 1–16 nepředvídaly:
+
+- **Kresba na úvodní stránce byla scvrklá na 300 bodů.** Bod 6b přidal kolem
+  obrázku sloupec s tlačítkem a `align-items: center` odřízlo obal kresby od
+  šířky sloupce; svg spadlo na svou výchozí velikost. Zarovnání teď dostává
+  jednotlivý prvek, ne celý sloupec. Kresba je 652 bodů široká místo 300.
+- **Tlačítko „Přehraj animaci“ na úvodní stránce nic nedělalo.** Animace byla
+  jen v `test.css`, který úvodní stránka nenačítá — stejná chyba jako kdysi
+  u kalkulačky. Animace má teď vlastní `css/helio.css` a načítají ho obě
+  stránky.
+- **Panel tiše deformoval obsah.** Panel je pružný sloupec, takže se barevná
+  škála u otázky 2 stlačila z 25 bodů na 7 a měření přesto hlásilo, že se vše
+  vejde. Nově se nic nezmenšuje samo; kde to chci (kresby u otázky 3), je to
+  povolené výslovně.
+
+Měření při 1280×720 i 1280×900: úvodní stránka, otázky 1–4 i výsledek mají
+přetečení 0 ve stránce i v obou panelech.
+
+## Otevřené pro verzi 6
+
+- **Prohlížení odpovědí se roluje v levém panelu**: o 134 bodů u otázky 1, 320
+  u otázky 2, 401 u otázky 3 a 180 u otázky 4 (při 1280×720). Vzorové řešení je
+  text navíc k celému zadání a vedle sebe se to nevejde. Možnosti: dát řešení do
+  pravého panelu k podnětu, nebo ho otevírat jako okénko přes stránku.
 - Výška tabulky u otázky 2 — kolik řádků má být vidět naráz?
 - Orientace obrázku u úlohy 1 v tisku — naležato, nebo nastojato?
 - Repozitář je privátní; pro GitHub Pages ho bude potřeba přepnout na veřejný.

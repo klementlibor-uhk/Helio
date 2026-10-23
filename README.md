@@ -15,10 +15,12 @@ Otevři `index.html` v prohlížeči. Žádný build ani server není potřeba.
 - `css/common.css` — barvy, typografie, ovládací prvky
 - `css/test.css` — rozvržení testu
 - `css/overlay.css` — vše, co se vznáší nad stránkou (okénka, kalkulačka, nápověda)
+- `css/helio.css` — animace modulu Helio; sdílená, protože kresba je na obou stránkách
+- `css/intro.css` — úvodní obrazovka
 - `js/scoring.js` — vyhodnocení; oddělené a spustitelné i v Node
 - `js/state.js` — stav odpovědí a pomocné funkce
 - `fonts/` — písmo Inter uložené v repozitáři (žádný požadavek na cizí server)
-- `docs/verze-2.md` — zadání úprav pro verzi 2
+- `docs/verze-2.md` až `docs/verze-5.md` — zadání úprav po jednotlivých kolech
 - `js/helio.js` — kresba modulu Helio, sdílená úvodní stránkou i otázkou 2
 - `js/questions.js` — jednotlivé otázky
 - `js/simulation.js` — otázka 2: mapa Zedlandu, simulace a tabulka
@@ -41,13 +43,20 @@ Vyhodnocení přijímá čárku i tečku, aby žáka netrestalo za numerickou kl
 
 ## Soukromí
 
-Nic se neodesílá a nikam neukládá. Jméno žije jen v `sessionStorage` té jedné
-záložky prohlížeče, odpovědi jen v paměti stránky. Žádné cookies, žádné sledování.
+Nic se neodesílá a nikam neukládá. Odpovědi žijí jen v paměti stránky a po jejím
+zavření beze stopy mizí. Žádné cookies, žádné úložiště, žádné sledování. Jméno se
+nikam nezadává — na stránce k vytištění je na ně prázdná linka.
 
 ## Stav
 
 Hotovo: úvodní obrazovka, všechny čtyři otázky, potvrzení odevzdání, výsledková
 obrazovka, prohlížení odpovědí s vysvětlením a tisk do portfolia.
+Verze 5: písmo i kresby rostou s velikostí okna (plynulá stupnice), krabice a
+kamiony u otázky 3 pod sebou přes celou šířku a zadání přesunuto doleva, mapa
+u otázky 2 větší a hned za kroky, tlačítko „Přehraj animaci“ na úvodní stránce,
+tři stejné paprsky od slunce, paprsky dolů k farmě, konec prázdné bílé karty
+pod výsledkem.
+
 Verze 4: karty vyplňují okno a obsah se v nich rozprostírá, obláček v kouli
 opraven, popisky kolem kresby na úvodní stránce.
 
@@ -55,4 +64,8 @@ Dříve — verze 2: nový vzhled podle PISA (bílá a bledě modrá), vlastní 
 karty, oddělený blok odpovědi, úvodní stránka bez jména, profesionálnější graf,
 animace Helia podle skutečného principu, překreslená farma, stav „Nezodpovězeno“,
 potvrzení před ztrátou odpovědí a názorné postupy v tisku.
+Rolování: změřeno při 1280×720 i 1280×900 — úvodní stránka, všechny čtyři otázky
+i výsledek se vejdou beze zbytku. Prohlížení odpovědí se v levém panelu roluje:
+vzorové řešení je text navíc a při 720 bodech výšky se vedle zadání nevejde.
+
 Zbývá pilotáž a rozhodnutí o zveřejnění přes GitHub Pages (repozitář je zatím privátní).

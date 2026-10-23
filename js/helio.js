@@ -73,12 +73,14 @@ var Helio = (function () {
       '<path d="M34 42 L38 50"></path><path d="M14 46 L14 55"></path></g>' +
 
       /* paprsky: na panel, do koule, a odraz od zrcadla vzhůru */
-      '<path d="M30 48 L34 132" stroke="#FFCE3A" stroke-width="2.2" stroke-dasharray="5 4"></path>' +
-      '<path d="M46 40 L142 74" stroke="#FFCE3A" stroke-width="2.4"></path>' +
-      '<path d="M142 74 L132 71 L136 80 Z" fill="#FFCE3A"></path>' +
-      '<path d="M120 150 L156 110" stroke="#FFCE3A" stroke-width="2.4"></path>' +
-      '<path d="M156 110 L146 113 L153 119 Z" fill="#FFCE3A"></path>' +
-      '<path d="M86 118 L118 148" stroke="#FFCE3A" stroke-width="2.2" stroke-dasharray="5 4"></path>' +
+      /* Tři stejné paprsky, všechny čárkované a všechny od okraje slunce:
+         k solárnímu panelu, k zrcadlu a ke kouli. Ve verzi 4 to byly tři různé
+         věci — jeden plný se šipkou a jeden začínal ve vzduchu. */
+      '<g stroke="#FFCE3A" stroke-width="2.2" stroke-dasharray="5 4" fill="none">' +
+      '<path d="M20.7 27.7 L34 128"></path>' +
+      '<path d="M36.1 21.8 L120 146"></path>' +
+      '<path d="M45.7 12.3 L130 70"></path>' +
+      '</g>' +
 
       /* zrcadlo pod koulí */
       '<ellipse cx="' + CX + '" cy="152" rx="80" ry="11" fill="#CBD6DF" stroke="#94A3AF" ' +

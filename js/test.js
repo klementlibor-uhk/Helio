@@ -56,6 +56,9 @@ var Engine = (function () {
   function renderQuestion() {
     var q = QUESTIONS[page];
     el.panels.className = 'panels' + (mode === 'review' ? ' review' : '');
+    /* Kód otázky v atributu, aby se dal rozpočet výšky ladit zvlášť tam,
+       kde je obsahu nejvíc, a ostatní obrazovky zůstaly vzdušné. */
+    el.panels.setAttribute('data-q', q.code);
     el.right.hidden = false;
     el.left.innerHTML = (mode === 'review' ? '<p class="review-flag">Prohlížení odpovědí</p>' : '') +
       q.left() + (mode === 'review' ? Result.solutionHTML(page) : '');
@@ -71,6 +74,7 @@ var Engine = (function () {
   /* Celostránkový obsah — výsledek a tisk do portfolia. */
   function renderWide(html) {
     el.panels.className = 'panels single';
+    el.panels.removeAttribute('data-q');
     el.right.hidden = true;
     el.right.innerHTML = '';
     el.left.innerHTML = html;

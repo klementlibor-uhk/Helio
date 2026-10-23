@@ -19,7 +19,7 @@ html, body { height: 100%; }
   background: var(--blue-700);
   color: #fff;
 }
-.topbar .name { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+.topbar .name { font-size: 1.059rem; font-weight: 600; letter-spacing: -0.01em; }
 .progress { display: flex; gap: 6px; }
 .progress span {
   width: 34px; height: 9px;
@@ -30,7 +30,7 @@ html, body { height: 100%; }
 .progress span.now { background: #fff; }
 .clock {
   margin-left: auto;
-  font-size: 16px;
+  font-size: 0.941rem;
   color: #fff;
   font-variant-numeric: tabular-nums;
 }
@@ -61,16 +61,16 @@ html, body { height: 100%; }
 /* ---------- obsah otázky ---------- */
 
 .eyebrow {
-  font-size: 13px;
+  font-size: 0.765rem;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   font-weight: 600;
   color: var(--blue);
   margin: 0 0 10px;
 }
-.question { font-size: 18px; font-weight: 600; line-height: 1.45; }
-.hint { font-size: 15px; color: var(--ink-soft); }
-.steps { margin: 14px 0 0; padding-left: 22px; font-size: 15px; color: var(--ink-soft); }
+.question { font-size: 1.059rem; font-weight: 600; line-height: 1.45; }
+.hint { font-size: 0.882rem; color: var(--ink-soft); }
+.steps { margin: 14px 0 0; padding-left: 22px; font-size: 0.882rem; color: var(--ink-soft); }
 .steps li { margin-bottom: 4px; }
 .sep-thin { border: 0; border-top: 1px solid var(--line); margin: 30px 0 24px; }
 mark { background: #FDF0C4; color: inherit; padding: 1px 3px; border-radius: 3px; }
@@ -83,7 +83,7 @@ mark { background: #FDF0C4; color: inherit; padding: 1px 3px; border-radius: 3px
   padding: 16px 18px 18px;
 }
 .answer-title {
-  font-size: 13px;
+  font-size: 0.765rem;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   font-weight: 600;
@@ -91,15 +91,15 @@ mark { background: #FDF0C4; color: inherit; padding: 1px 3px; border-radius: 3px
   margin: 0 0 12px;
 }
 .answer-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.answer-row input[type="text"] { width: 150px; text-align: right; font-size: 17px; font-weight: 500; }
-.answer-row .unit { color: var(--ink-soft); font-size: 16px; }
+.answer-row input[type="text"] { width: 150px; text-align: right; font-size: 1.000rem; font-weight: 500; }
+.answer-row .unit { color: var(--ink-soft); font-size: 0.941rem; }
 .answer-block select { width: 100%; }
 .answer-block textarea { width: 100%; margin-top: 4px; }
-.text-label { display: block; font-size: 15px; font-weight: 500; margin: 16px 0 6px; }
-.hint.small { font-size: 13px; color: var(--ink-mute); margin-top: 6px; }
+.text-label { display: block; font-size: 0.882rem; font-weight: 500; margin: 16px 0 6px; }
+.hint.small { font-size: 0.765rem; color: var(--ink-mute); margin-top: 6px; }
 
-.figure-title { font-size: 15px; font-weight: 600; margin: 0 0 14px; }
-.figure-source { font-size: 12px; color: var(--ink-mute); margin: 12px 0 0; line-height: 1.5; }
+.figure-title { font-size: 0.882rem; font-weight: 600; margin: 0 0 14px; }
+.figure-source { font-size: 0.706rem; color: var(--ink-mute); margin: 12px 0 0; line-height: 1.5; }
 
 /* ---------- spodní lišta ---------- */
 
@@ -116,7 +116,7 @@ mark { background: #FDF0C4; color: inherit; padding: 1px 3px; border-radius: 3px
   box-shadow: var(--shadow);
 }
 .footer .spacer { margin-left: auto; }
-.help-btn { width: 44px; padding: 0; font-size: 18px; font-weight: 600; }
+.help-btn { width: 44px; padding: 0; font-size: 1.059rem; font-weight: 600; }
 
 /* ---------- otázka 2: mapa, škála, simulace, tabulka ---------- */
 
@@ -130,11 +130,11 @@ mark { background: #FDF0C4; color: inherit; padding: 1px 3px; border-radius: 3px
 .town:focus { outline: none; }
 .town:focus-visible .dot { stroke: var(--blue); stroke-width: 6; }
 
-.scale-label { font-size: 15px; color: var(--ink); margin: 10px 0 5px; font-weight: 500; }
+.scale-label { font-size: 0.882rem; color: var(--ink); margin: 10px 0 5px; font-weight: 500; }
 .scale { display: flex; border-radius: 5px; overflow: hidden; }
-.scale span { flex: 1; text-align: center; font-size: 14px; font-weight: 600; padding: 4px 0; }
-.chosen { font-size: 16px; color: var(--ink-soft); margin: 14px 0 0; }
-.chosen strong { color: var(--blue-700); font-size: 18px; }
+.scale span { flex: 1; text-align: center; font-size: 0.824rem; font-weight: 600; padding: 4px 0; }
+.chosen { font-size: 0.941rem; color: var(--ink-soft); margin: 14px 0 0; }
+.chosen strong { color: var(--blue-700); font-size: 1.059rem; }
 
 .helio-wrap {
   position: relative;
@@ -146,7 +146,7 @@ mark { background: #FDF0C4; color: inherit; padding: 1px 3px; border-radius: 3px
 .play {
   position: absolute; right: 12px; bottom: 12px;
   width: 40px; height: 40px; padding: 0;
-  border-radius: 50%; font-size: 14px; line-height: 1;
+  border-radius: 50%; font-size: 0.824rem; line-height: 1;
   background: var(--white);
 }
 .helio-text { margin-top: 12px; }
@@ -159,36 +159,36 @@ mark { background: #FDF0C4; color: inherit; padding: 1px 3px; border-radius: 3px
   margin: 16px 0;
 }
 .slider-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-.slider-row label { font-size: 15px; width: 120px; flex: 0 0 auto; }
+.slider-row label { font-size: 0.882rem; width: 120px; flex: 0 0 auto; }
 .slider-body { flex: 1 1 auto; min-width: 0; }
 .slider-body input[type="range"] { width: 100%; margin: 0; accent-color: var(--blue); }
 .ticks { display: flex; justify-content: space-between; margin-top: 2px; }
 .tick {
   height: auto; padding: 0 4px; border: 0; background: none;
-  font-size: 13px; color: var(--ink-soft); line-height: 1.3; font-weight: 400;
+  font-size: 0.765rem; color: var(--ink-soft); line-height: 1.3; font-weight: 400;
 }
 .tick:hover { background: none; color: var(--blue); text-decoration: underline; }
 .tick.on { color: var(--blue-700); font-weight: 600; }
 .slider-row output {
-  font-size: 16px; font-weight: 600; width: 54px; text-align: right; flex: 0 0 auto;
+  font-size: 0.941rem; font-weight: 600; width: 54px; text-align: right; flex: 0 0 auto;
   color: var(--blue-700);
 }
 .run { width: 100%; }
-.sim-note { font-size: 13px; color: var(--ink-soft); margin: 10px 0 0; }
+.sim-note { font-size: 0.765rem; color: var(--ink-soft); margin: 10px 0 0; }
 
-table.data { width: 100%; border-collapse: collapse; font-size: 15px; }
+table.data { width: 100%; border-collapse: collapse; font-size: 0.882rem; }
 table.data th {
-  background: var(--blue-100); color: var(--blue-900); font-weight: 600; font-size: 13px;
+  background: var(--blue-100); color: var(--blue-900); font-weight: 600; font-size: 0.765rem;
   border: 1px solid var(--blue-200); padding: 7px 8px; text-align: left;
 }
 table.data td { border: 1px solid var(--blue-200); padding: 5px 8px; }
 table.data tr.marked td { background: var(--ok-bg); color: var(--ok-ink); }
 table.data td.star, table.data td.del,
 table.data th.star, table.data th.del { width: 58px; text-align: center; padding: 2px; }
-table.data th.star, table.data th.del { font-size: 11px; letter-spacing: 0.04em; }
+table.data th.star, table.data th.del { font-size: 0.647rem; letter-spacing: 0.04em; }
 table.data .mark {
   border: 0; background: none; height: 30px; width: 30px; padding: 0;
-  font-size: 19px; line-height: 1; color: var(--ink-mute);
+  font-size: 1.118rem; line-height: 1; color: var(--ink-mute);
 }
 table.data .mark:hover { background: none; color: var(--blue); }
 table.data tr.marked .mark { color: var(--ok-ink); }
@@ -199,7 +199,7 @@ table.data .remove {
 table.data .remove:hover { background: none; }
 table.data .remove svg { display: block; margin: 0 auto; }
 table.data tr.empty td {
-  text-align: center; color: var(--ink-mute); font-size: 14px; padding: 16px;
+  text-align: center; color: var(--ink-mute); font-size: 0.824rem; padding: 16px;
 }
 
 
@@ -210,7 +210,7 @@ table.data tr.empty td {
 .boxes img:first-child { width: 48%; }
 .boxes img:last-child { width: 37%; }
 .trucks-title { margin: 16px 0 6px; }
-.truck-label { font-size: 14px; font-weight: 500; margin: 0 0 3px; }
+.truck-label { font-size: 0.824rem; font-weight: 500; margin: 0 0 3px; }
 img.truck { display: block; width: 100%; margin: 0 0 8px; }
 .trucks-note { margin-top: 8px; }
 
@@ -231,7 +231,7 @@ img.farm {
 .panels.review .remove { pointer-events: none; }
 .panels.review .sim { opacity: 0.6; }
 .review-flag {
-  font-size: 13px; letter-spacing: 0.09em; text-transform: uppercase;
+  font-size: 0.765rem; letter-spacing: 0.09em; text-transform: uppercase;
   font-weight: 600; color: var(--ink-mute); margin: 0 0 12px;
 }
 
@@ -239,7 +239,7 @@ img.farm {
 /* ---------- výsledek ---------- */
 
 .result, .portfolio { max-width: 780px; margin: 0 auto; }
-.result h1 { font-size: 32px; }
+.result h1 { font-size: 1.882rem; }
 .score-row { display: flex; gap: 14px; margin: 22px 0 26px; flex-wrap: wrap; }
 .score {
   flex: 1 1 150px;
@@ -248,8 +248,8 @@ img.farm {
   border-radius: 12px;
   padding: 14px 16px;
 }
-.score strong { display: block; font-size: 28px; font-weight: 600; color: var(--blue-700); line-height: 1.2; }
-.score span { font-size: 14px; color: var(--ink-soft); }
+.score strong { display: block; font-size: 1.647rem; font-weight: 600; color: var(--blue-700); line-height: 1.2; }
+.score span { font-size: 0.824rem; color: var(--ink-soft); }
 
 .qlist { list-style: none; margin: 12px 0 0; padding: 0; }
 .qlist li { margin: 0 0 8px; }
@@ -261,14 +261,14 @@ img.farm {
 .qlist .n {
   flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%;
   background: var(--blue-100); color: var(--blue-700);
-  font-size: 15px; font-weight: 600;
+  font-size: 0.882rem; font-weight: 600;
   display: flex; align-items: center; justify-content: center;
 }
-.qlist .t { flex: 1 1 auto; font-size: 16px; font-weight: 500; }
-.qlist .pts { flex: 0 0 auto; font-size: 15px; color: var(--ink-soft); min-width: 36px; text-align: right; }
+.qlist .t { flex: 1 1 auto; font-size: 0.941rem; font-weight: 500; }
+.qlist .pts { flex: 0 0 auto; font-size: 0.882rem; color: var(--ink-soft); min-width: 36px; text-align: right; }
 
 .badge {
-  font-size: 13px; font-weight: 600; padding: 4px 12px;
+  font-size: 0.765rem; font-weight: 600; padding: 4px 12px;
   border-radius: 20px; white-space: nowrap;
 }
 .badge.ok { background: var(--ok-bg); color: var(--ok-ink); }
@@ -286,26 +286,26 @@ img.farm {
   border-radius: 12px;
   padding: 16px 18px;
   margin: 24px 0 0;
-  font-size: 15px;
+  font-size: 0.882rem;
 }
 .solution p { margin: 0 0 10px; }
 .solution p:last-child { margin-bottom: 0; }
-.sol-head { font-weight: 600; color: var(--ok-ink); font-size: 16px; }
-.sol-head .pts { font-weight: 400; color: var(--ink-soft); margin-left: 8px; font-size: 14px; }
+.sol-head { font-weight: 600; color: var(--ok-ink); font-size: 0.941rem; }
+.sol-head .pts { font-weight: 400; color: var(--ink-soft); margin-left: 8px; font-size: 0.824rem; }
 .sol-given { color: var(--ink-soft); }
 .sol-steps { margin: 10px 0; padding-left: 20px; }
 .sol-steps li { margin-bottom: 4px; }
 
 /* ---------- portfolio a tisk ---------- */
 
-.portfolio .meta { font-size: 15px; color: var(--ink-soft); margin: 0 0 8px; }
-.portfolio .nameline { font-size: 15px; color: var(--ink-soft); margin: 0 0 20px; }
+.portfolio .meta { font-size: 0.882rem; color: var(--ink-soft); margin: 0 0 8px; }
+.portfolio .nameline { font-size: 0.882rem; color: var(--ink-soft); margin: 0 0 20px; }
 .pf-item { border-top: 1px solid var(--line); padding: 18px 0 6px; }
-.pf-item h2 { font-size: 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.pf-given { font-size: 16px; margin: 0 0 8px; }
+.pf-item h2 { font-size: 1.059rem; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.pf-given { font-size: 0.941rem; margin: 0 0 8px; }
 .pf-given span { color: var(--ink-soft); }
 .pf-sol {
-  font-size: 15px; background: var(--blue-50);
+  font-size: 0.882rem; background: var(--blue-50);
   border-radius: 10px; padding: 14px 16px;
 }
 .pf-sol ol { margin: 8px 0 0; padding-left: 22px; }
@@ -342,53 +342,15 @@ img.farm {
 
 .figure-title .unit-note {
   display: block;
-  font-size: 13px;
+  font-size: 0.765rem;
   font-weight: 400;
   color: var(--ink-mute);
   margin-top: 2px;
 }
 
 
-/* ---------- animace vzniku vody (3,2 s) ---------- */
-/* Pořadí fází: slunce rozsvítí panel → čerpadlo přižene mořskou vodu do vaničky →
-   odpařování a pára → kondenzace na stěně → kapky stékají na dno → odtok ven. */
-
-.helio .vapor, .helio .drops, .helio .spark, .helio .drop { transform-box: view-box; }
-.helio .flow-in, .helio .flow-out { stroke-dashoffset: 0; }
-
-.helio.playing .spark    { animation: h-spark 3.2s ease-out; }
-.helio.playing .flow-in  { animation: h-in 3.2s linear; }
-.helio.playing .vapor    { animation: h-vapor 3.2s ease-out; }
-.helio.playing .drops    { animation: h-drops 3.2s ease-out; }
-.helio.playing .drop-a   { animation: h-run-a 3.2s ease-in; }
-.helio.playing .drop-b   { animation: h-run-b 3.2s ease-in; }
-.helio.playing .drop-c   { animation: h-run-c 3.2s ease-in; }
-.helio.playing .flow-out { animation: h-out 3.2s linear; }
-
-@keyframes h-spark { 0% { opacity: 0.25 } 10%, 100% { opacity: 1 } }
-@keyframes h-in    { 0% { stroke-dashoffset: 300 } 40%, 100% { stroke-dashoffset: 0 } }
-@keyframes h-vapor { 0%, 26% { opacity: 0 } 48%, 100% { opacity: 1 } }
-@keyframes h-drops { 0%, 46% { opacity: 0 } 64%, 100% { opacity: 1 } }
-@keyframes h-run-a {
-  0%, 58% { opacity: 0; transform: translate(0, 0); }
-  64% { opacity: 1; }
-  92%, 100% { opacity: 1; transform: translate(-4px, 70px); }
-}
-@keyframes h-run-b {
-  0%, 64% { opacity: 0; transform: translate(0, 0); }
-  70% { opacity: 1; }
-  96%, 100% { opacity: 1; transform: translate(5px, 74px); }
-}
-@keyframes h-run-c {
-  0%, 70% { opacity: 0; transform: translate(0, 0); }
-  76% { opacity: 1; }
-  100% { opacity: 1; transform: translate(-2px, 44px); }
-}
-@keyframes h-out   { 0%, 72% { stroke-dashoffset: 200 } 100% { stroke-dashoffset: 0 } }
-
-@media (prefers-reduced-motion: reduce) {
-  .helio.playing * { animation: none !important; }
-}
+/* Animace Helia má vlastní soubor css/helio.css — načítají ho obě stránky,
+   protože kresba je společná pro úvod i otázku 2. */
 
 /* ---------- otázka 2: rozvržení pravého panelu ---------- */
 /* Obrázek vedle ovladačů, tabulka přes celou šířku pod nimi. */
@@ -399,11 +361,11 @@ img.farm {
   align-items: start;
 }
 .q2-fig .helio-wrap { padding: 6px; }
-.q2-fig .helio-text { margin-top: 8px; font-size: 13px; line-height: 1.5; }
+.q2-fig .helio-text { margin-top: 8px; font-size: 0.765rem; line-height: 1.5; }
 .q2-controls .sim { margin: 0; }
 .q2-controls .slider-row { margin-bottom: 10px; }
-.q2-controls .slider-row label { width: 104px; font-size: 14px; }
-.sim-note { font-size: 12px; margin-top: 8px; }
+.q2-controls .slider-row label { width: 104px; font-size: 0.824rem; }
+.sim-note { font-size: 0.706rem; margin-top: 8px; }
 .play { width: 34px; height: 34px; right: 8px; bottom: 8px; }
 
 /* tabulka nesmí růst donekonečna — výška je rozpočet, ne přání */
@@ -416,17 +378,17 @@ img.farm {
 .chosen { margin-top: 10px; }
 
 /* ---------- doladění rozpočtu výšky ---------- */
-.steps { font-size: 14px; line-height: 1.5; margin-top: 8px; padding-left: 20px; }
+.steps { font-size: 0.824rem; line-height: 1.5; margin-top: 8px; padding-left: 20px; }
 .steps li { margin-bottom: 1px; }
-.chosen { font-size: 15px; margin-top: 8px; }
-.chosen strong { font-size: 16px; }
-.scale span { padding: 3px 0; font-size: 13px; }
-.scale-label { font-size: 14px; margin: 8px 0 4px; }
+.chosen { font-size: 0.882rem; margin-top: 8px; }
+.chosen strong { font-size: 0.941rem; }
+.scale span { padding: 3px 0; font-size: 0.765rem; }
+.scale-label { font-size: 0.824rem; margin: 8px 0 4px; }
 
 .result h1 { margin-bottom: 2px; }
 .score-row { margin: 16px 0 18px; gap: 12px; }
 .score { padding: 10px 14px; }
-.score strong { font-size: 25px; }
+.score strong { font-size: 1.471rem; }
 .qlist button { padding: 10px 14px; }
 .qlist li { margin-bottom: 6px; }
 .result-actions { margin-top: 18px; }
@@ -436,7 +398,7 @@ img.farm {
 .panel p { margin-bottom: 9px; }
 .question { line-height: 1.4; }
 .eyebrow { margin-bottom: 9px; }
-.q2-fig .helio-text { font-size: 12.5px; }
+.q2-fig .helio-text { font-size: 0.735rem; }
 
 /* Kresby u otázky 3 se nesmí řídit šířkou panelu — tím rostly do výšky.
    Výšku odvozujeme od okna, šířka se dopočítá podle poměru stran. */
@@ -452,14 +414,14 @@ img.truck {
   max-height: 112px;
   margin: 0 0 6px;
 }
-.trucks-note { font-size: 13px; }
+.trucks-note { font-size: 0.765rem; }
 
 .answer-block textarea { height: 13vh; min-height: 84px; max-height: 150px; }
 #table-wrap { max-height: 158px; }
 
 .boxes img, .boxes img:first-child, .boxes img:last-child { height: 16vh; max-height: 150px; }
 img.truck { height: 11.5vh; max-height: 98px; margin: 0 0 4px; }
-.truck-label { font-size: 13px; margin: 0 0 1px; }
+.truck-label { font-size: 0.765rem; margin: 0 0 1px; }
 .trucks-title { margin: 12px 0 4px; }
 .boxes { margin-top: 10px; }
 
@@ -495,12 +457,12 @@ img.truck { height: 11.5vh; max-height: 98px; margin: 0 0 4px; }
 img.truck { height: 17vh; max-height: 170px; margin: 0 0 8px; }
 .map-wrap { max-width: min(300px, 34vh); }
 #table-wrap { max-height: 40vh; }
-.q2-fig .helio-text { font-size: 13.5px; }
-.chosen { font-size: 16px; }
-.chosen strong { font-size: 22px; }
+.q2-fig .helio-text { font-size: 0.794rem; }
+.chosen { font-size: 0.941rem; }
+.chosen strong { font-size: 1.294rem; }
 
 /* popisek škály na celou šířku panelu, samotný pás užší */
-.scale-label { font-size: 15px; white-space: nowrap; }
+.scale-label { font-size: 0.882rem; white-space: nowrap; }
 .scale { max-width: 420px; }
 
 /* ---------- otázka 3: krabice a kamiony vedle sebe ---------- */
@@ -525,9 +487,9 @@ img.truck { height: 17vh; max-height: 170px; margin: 0 0 8px; }
 /* Na nízkém okně se musí vejít i otázka 2; na vyšším všechno samo povyroste. */
 .sep-thin { margin: 18px 0 14px; }
 .map-wrap { max-width: min(320px, 24vh); }
-.steps { font-size: 13.5px; }
-.chosen { margin-top: 6px; font-size: 15px; }
-.chosen strong { font-size: 19px; }
+.steps { font-size: 0.794rem; }
+.chosen { margin-top: 6px; font-size: 0.882rem; }
+.chosen strong { font-size: 1.118rem; }
 .scale-label { margin: 6px 0 4px; }
 .score-row { margin: 14px 0 14px; }
 .result-actions { margin-top: 14px; }
@@ -547,3 +509,73 @@ img.truck { height: 17vh; max-height: 170px; margin: 0 0 8px; }
 .q3-cols .boxes img,
 .q3-cols .boxes img:first-child { width: 56%; height: auto; max-height: 30vh; }
 .q3-cols .boxes img:last-child { width: 42%; height: auto; max-height: 30vh; }
+
+/* ---------- verze 5 ---------- */
+
+/* Skrytý panel musí zůstat skrytý — .panel { display: flex } z verze 4
+   přebíjelo atribut hidden, takže na výsledku zůstávala prázdná bílá karta. */
+.panel[hidden] { display: none !important; }
+
+/* Žádné odsouvání k dolní hraně. Pevný velkorysý odstup je předvídatelný;
+   trik s auto-okrajem jednou vyšel a dvakrát uškodil. */
+.answer-block { margin-top: 2em; }
+.map-wrap { margin-top: 0.8em; }
+
+/* Kresby se řídí panelem, ne jen výškou okna — s mezí ve vh jako pojistkou,
+   aby platilo pravidlo, že se nikde neroluje. */
+.map-wrap { max-width: min(360px, 74%, 33vh); }
+
+/* Otázka 3 zpět pod sebe: krabice nahoře, kamiony pod nimi, obojí na plnou
+   šířku panelu. Dvousloupcové rozvržení z verze 4 už není potřeba.
+
+   Pravý panel je sloupec, takže kresby v něm necháme sdílet zbylou výšku:
+   mají velkorysou výchozí velikost a když se na ni nedostane, poměrně se
+   zmenší. Tím se nemůže stát, co se stalo teď — že druhý kamion vypadl pod
+   dolní hranu panelu. object-fit zaručí, že se při zmenšení nezdeformují. */
+.q3-cols { display: block; }
+.boxes { justify-content: center; margin-top: 0.7em; }
+#panel-right > .boxes { flex: 0 1 auto; min-height: 0; }
+#panel-right > .boxes img,
+#panel-right > .boxes img:first-child,
+#panel-right > .boxes img:last-child {
+  width: auto;
+  height: 23vh;
+  max-height: 100%;
+  max-width: 46%;
+  object-fit: contain;
+  object-position: bottom center;
+}
+#panel-right > img.truck {
+  flex: 0 1 auto;
+  min-height: 0;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  margin: 0 0 0.4em;
+}
+.trucks-title { margin: 0.7em 0 0.3em; }
+[data-q="PV3"] .trucks-note { margin-top: 0.5em; }
+
+/* Panel je sloupec, takže všechno v něm je položka pružného rozvržení a smí
+   se zmenšit. To je zrádné: barevná škála u otázky 2 se tiše stlačila z 25
+   bodů na 7 a měření pak hlásilo, že se všechno vešlo. Nic se samo zmenšovat
+   nebude; kde to chci (kresby u otázky 3), povolím to výslovně. */
+.panel > * { flex-shrink: 0; }
+
+/* Otázka 2 má v levém panelu nejvíc věcí pod sebou: zadání, kroky, mapu,
+   barevnou škálu i volbu města. Prostor pro mapu si bereme z odstupů mezi
+   nimi — mapa je přednostní prvek rozpočtu, ne první věc ke zmenšení. */
+[data-q="PV2"] .sep-thin { margin: 10px 0 9px; }
+[data-q="PV2"] .steps { margin-top: 6px; }
+[data-q="PV2"] #panel-left > p { line-height: 1.5; }
+.map-wrap { margin-top: 0.3em; }
+.map { margin-top: 4px; }
+.scale-label { margin: 4px 0 3px; }
+.scale span { padding: 2px 0; font-size: 0.735rem; }
+.chosen { margin-top: 5px; }
+.map-wrap { max-width: min(360px, 74%, 28.5vh); }
+
+/* Na vyšším okně rostlo s písmem i volné pole pro vysvětlení a levý panel
+   otázky 3 přetékal. Pole stačí nižší — čtyři řádky se do něj pořád vejdou. */
+.answer-block textarea { height: 10.5vh; min-height: 84px; max-height: 130px; }
