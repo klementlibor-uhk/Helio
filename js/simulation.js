@@ -86,16 +86,17 @@ var Sim = (function () {
     return '<p class="eyebrow">Otázka 2 ze 4</p>' +
       '<p>Lucy bydlí v jednom z měst na Zedlandu. Říká, že její rodina koupila jeden modul ' +
       'Helio a ten vyrobil 2 920 litrů pitné vody za rok. Modul pracoval průměrně 8 hodin denně.</p>' +
+      '<hr class="sep-thin">' +
       '<p class="question">Ve kterém městě Lucy bydlí?</p>' +
       '<ol class="steps">' +
       '<li>Spusť simulaci a získej data.</li>' +
       '<li>Na mapě klikni na město, kde podle tebe Lucy bydlí.</li>' +
       '<li>V tabulce označ řádky, které tvou odpověď podporují.</li>' +
       '</ol>' +
-      '<div class="map-wrap">' +
-      '<div class="map">' + mapSVG() + '</div>' +
+      /* Škála je mimo úzký sloupec s mapou, aby se její popisek vešel
+         na jeden řádek a bylo jasné, že vysvětluje škálu, ne obrázek. */
+      '<div class="map-wrap"><div class="map">' + mapSVG() + '</div></div>' +
       scaleHTML() +
-      '</div>' +
       '<p class="chosen">Vybrané město: <strong id="chosen-town">' +
       (answers.q2town || '—') + '</strong></p>';
   }

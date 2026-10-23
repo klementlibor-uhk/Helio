@@ -48,7 +48,10 @@ záložky prohlížeče, odpovědi jen v paměti stránky. Žádné cookies, ž�
 
 Hotovo: úvodní obrazovka, všechny čtyři otázky, potvrzení odevzdání, výsledková
 obrazovka, prohlížení odpovědí s vysvětlením a tisk do portfolia.
-Verze 2: nový vzhled podle PISA (bílá a bledě modrá), vlastní písmo, panely jako dvě
+Verze 4: karty vyplňují okno a obsah se v nich rozprostírá, obláček v kouli
+opraven, popisky kolem kresby na úvodní stránce.
+
+Dříve — verze 2: nový vzhled podle PISA (bílá a bledě modrá), vlastní písmo, panely jako dvě
 karty, oddělený blok odpovědi, úvodní stránka bez jména, profesionálnější graf,
 animace Helia podle skutečného principu, překreslená farma, stav „Nezodpovězeno“,
 potvrzení před ztrátou odpovědí a názorné postupy v tisku.

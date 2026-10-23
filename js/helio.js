@@ -29,12 +29,37 @@ var Helio = (function () {
     return out;
   }
 
-  function svg(extraClass) {
+  /* Popisky jen pro úvodní stránku, kde je kresba velká. Leží VEDLE obrázku,
+     ne v něm — proto se pro ně rozšíří viewBox do stran a dolů. V otázce 2 je
+     kresba malá a princip je popsaný textem vedle ní, tam popisky nejsou. */
+  function labels() {
+    var t = function (x, y, anchor, text) {
+      return '<text x="' + x + '" y="' + y + '" font-size="11" text-anchor="' + anchor +
+        '" fill="#14558C" font-family="inherit">' + text + '</text>';
+    };
+    var lead = function (d) {
+      return '<path d="' + d + '" stroke="#9FBBD2" stroke-width="1" fill="none"></path>';
+    };
+    return '<g class="popisky">' +
+      t(-8, 99, 'end', 'vanička s mořskou vodou') + lead('M-4 96 H' + (TRAY_X1 - 16)) +
+      t(-8, 149, 'end', 'solární panel') + lead('M-4 146 H8') +
+      t(-8, 192, 'end', 'mořská voda') +
+      t(304, 163, 'start', 'zrcadlo') + lead('M300 160 L258 153') +
+      t(304, 192, 'start', 'pitná voda') +
+      t(81, 230, 'middle', 'čerpadlo') + lead('M81 208 V221') +
+      t(240, 230, 'middle', 'remineralizace') + lead('M240 209 V221') +
+      '</g>';
+  }
+
+  /* opts.popisky = true → širší výřez a popisky okolo */
+  function svg(extraClass, opts) {
+    var sPopisky = !!(opts && opts.popisky);
     var poolHalf = Math.sqrt(R * R - (POOL_Y - CY) * (POOL_Y - CY));
     var poolX1 = (CX - poolHalf).toFixed(1), poolX2 = (CX + poolHalf).toFixed(1);
+    var box = sPopisky ? '-152 -8 548 252' : '0 0 300 208';
 
     return '<svg class="helio' + (extraClass ? ' ' + extraClass : '') + '" id="helio-svg" ' +
-      'viewBox="0 0 300 208" width="100%" role="img" ' +
+      'viewBox="' + box + '" width="100%" role="img" ' +
       'aria-label="Modul Helio: čerpadlo žene mořskou vodu do vaničky uprostřed koule, ' +
       'voda se odpařuje, na stěně kondenzuje, kapky stékají na dno jako pitná voda ' +
       'a odtékají přes remineralizaci.">' +
@@ -78,15 +103,20 @@ var Helio = (function () {
       '</g>' +
       '</g>' +
 
-      /* pára a odpařování z vaničky */
-      '<g class="vapor">' +
-      '<path d="M146 50 q-10 0 -10 -9 q0 -9 10 -9 q3 -13 14 -13 q9 -9 19 -3 q13 -5 17 9 ' +
-      'q10 1 10 9 q0 9 -10 9 Z" fill="#FFFFFF" stroke="#BBD7EC" stroke-width="1.3"></path>' +
+      /* Pára a odpařování z vaničky.
+         Obláček musí být CELÝ uvnitř koule — celý děj se odehrává v ní.
+         Ve verzi 3 prostupoval stěnou: sahal od výšky 28 a byl 80 bodů široký,
+         zatímco koule je v té výšce široká jen 50. Teď je menší, posunutý níž
+         a navíc ořezaný tvarem koule jako pojistka. */
+      '<g class="vapor" clip-path="url(#ball)">' +
+      '<path d="M156 66 C148 66 146 59 153 55 C152 48 161 44 167 47 ' +
+      'C171 42 182 42 186 47 C195 46 200 52 198 57 C203 59 202 66 195 66 Z" ' +
+      'fill="#FFFFFF" stroke="#8FB6D8" stroke-width="1.8"></path>' +
       '<g stroke="#2D7CD6" stroke-width="2.2" stroke-dasharray="4 3">' +
-      '<path d="M150 90 V66"></path><path d="M176 90 V62"></path><path d="M202 90 V66"></path></g>' +
-      '<path d="M146 66 L150 59 L154 66 Z" fill="#2D7CD6"></path>' +
-      '<path d="M172 62 L176 55 L180 62 Z" fill="#2D7CD6"></path>' +
-      '<path d="M198 66 L202 59 L206 66 Z" fill="#2D7CD6"></path>' +
+      '<path d="M150 90 V74"></path><path d="M176 90 V70"></path><path d="M202 90 V74"></path></g>' +
+      '<path d="M146 74 L150 67 L154 74 Z" fill="#2D7CD6"></path>' +
+      '<path d="M172 70 L176 63 L180 70 Z" fill="#2D7CD6"></path>' +
+      '<path d="M198 74 L202 67 L206 74 Z" fill="#2D7CD6"></path>' +
       '</g>' +
 
       /* vanička s mořskou vodou, zavěšená na obruči — mezera ke stěně zůstává */
@@ -123,6 +153,7 @@ var Helio = (function () {
       '<rect x="222" y="185" width="36" height="22" rx="3" fill="#A6ADB5"></rect>' +
       '<g stroke="#59636D" stroke-width="2.2">' +
       '<path d="M231 188 V204"></path><path d="M240 188 V204"></path><path d="M249 188 V204"></path></g>' +
+      (sPopisky ? labels() : '') +
       '</svg>';
   }
 

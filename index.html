@@ -47,7 +47,7 @@
 
 <script src="js/helio.js"></script>
 <script>
-document.getElementById('helio-slot').innerHTML = Helio.svg();
+document.getElementById('helio-slot').innerHTML = Helio.svg('', { popisky: true });
 
 document.getElementById('start').addEventListener('click', function () {
   location.href = 'test.html';

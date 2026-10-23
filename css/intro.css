@@ -88,3 +88,22 @@ button.big { height: 58px; font-size: 19px; padding: 0 38px; }
   .lead { font-size: 18px; }
   .intro-foot { flex-direction: column-reverse; align-items: flex-start; gap: 14px; }
 }
+
+/* ---------- verze 4: karta si vezme většinu okna ---------- */
+.intro-page { align-items: stretch; padding: 22px; }
+.intro-card {
+  max-width: 1500px;
+  margin: 0 auto;
+  min-height: calc(100vh - 44px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 52px 60px 28px;
+}
+.intro-head { flex: 1 1 auto; }
+.intro-img { width: 620px; max-width: 52%; }
+.intro-foot { margin-top: 28px; }
+
+/* Verze s popisky má širší výřez, takže kontejner musí být širší,
+   aby samotná kresba byla větší než předtím, ne menší. */
+.intro-img { width: 940px; max-width: 58%; }

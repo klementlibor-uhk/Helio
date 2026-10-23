@@ -80,7 +80,7 @@ var QUESTIONS = [
         '<p class="hint">Odpověď uveď v milionech.</p>' +
         answerBlock(answerNumber('q1', 'milionů'));
     },
-    right: chartAccess
+    right: function () { return '<div class="center-fig">' + chartAccess() + '</div>'; }
   },
   {
     code: 'PV2',
@@ -106,11 +106,17 @@ var QUESTIONS = [
     right: function () {
       return '<p>Městský úřad se rozhodl vyřešit problémy s pitnou vodou výstavbou farmy ' +
         'Helio, která se skládá z mnoha modulů. Jeden modul se veze ve dvou krabicích.</p>' +
+        /* Krabice a kamiony vedle sebe, ne pod sebou — panel je široký a výšky
+           je málo. Obojí se tím může nakreslit výrazně větší. */
+        '<div class="q3-cols">' +
+        '<div class="q3-boxes">' +
         '<div class="boxes">' +
         '<img src="img/krabice-velka.svg" alt="Velká krabice 167 krát 159 krát 95 centimetrů.">' +
         '<img src="img/krabice-mala.svg" alt="Malá krabice 131 krát 56 krát 40 centimetrů.">' +
         '</div>' +
         '<p class="hint">Obě krabice se musí vézt touto stranou nahoru.</p>' +
+        '</div>' +
+        '<div class="q3-trucks">' +
         '<p class="figure-title trucks-title">Úložný prostor</p>' +
         '<p class="truck-label">Kamion s návěsem I</p>' +
         '<img class="truck" src="img/kamion-1.svg" ' +
@@ -119,7 +125,8 @@ var QUESTIONS = [
         '<img class="truck" src="img/kamion-2.svg" ' +
         'alt="Kamion s návěsem II: úložné prostory 7,3 a 8,2 metru.">' +
         '<p class="hint trucks-note">Oba typy mají úložný prostor široký 2,48 m, ' +
-        'vysoký 3,0 m, o celkovém objemu 115 m³.</p>';
+        'vysoký 3,0 m, o celkovém objemu 115 m³.</p>' +
+        '</div></div>';
     }
   },
   {
@@ -136,12 +143,13 @@ var QUESTIONS = [
         answerBlock(answerNumber('q4', 'zedů'));
     },
     right: function () {
-      return '<img class="farm" src="img/farma.svg" ' +
+      return '<div class="center-fig">' +
+        '<img class="farm" src="img/farma.svg" ' +
         'alt="Farma Helio: skupiny modulů rozmístěné v kruzích na pobřežní krajině.">' +
         '<p class="farm-text">Městský úřad se rozhodl vyřešit problémy s pitnou vodou ' +
         've svém městě výstavbou farmy Helio. Farma se skládá z mnoha modulů.</p>' +
         '<div class="note"><strong>Návratnost investice</strong> je doba, za kterou se ' +
-        'vložené peníze vrátí z výnosů.</div>';
+        'vložené peníze vrátí z výnosů.</div></div>';
     }
   }
 ];
