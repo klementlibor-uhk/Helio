@@ -4,9 +4,12 @@ Elektronická matematická úloha inspirovaná šetřením PISA. Čtyři otázky
 Helio, který ze slunce a mořské vody vyrábí pitnou vodu. Úloha je původní, podaná
 Českou republikou do PISA 2021; do hlavního šetření se nedostala.
 
+**Online: <https://klementlibor-uhk.github.io/Helio/>**
+
 ## Spuštění
 
-Otevři `index.html` v prohlížeči. Žádný build ani server není potřeba.
+Otevři `index.html` v prohlížeči. Žádný build ani server není potřeba. Totéž
+běží na GitHub Pages z větve `main` — co je v `main`, to je na webu.
 
 ## Struktura
 
@@ -68,4 +71,8 @@ Rolování: změřeno při 1280×720 i 1280×900 — úvodní stránka, všechny
 i výsledek se vejdou beze zbytku. Prohlížení odpovědí se v levém panelu roluje:
 vzorové řešení je text navíc a při 720 bodech výšky se vedle zadání nevejde.
 
-Zbývá pilotáž a rozhodnutí o zveřejnění přes GitHub Pages (repozitář je zatím privátní).
+Repozitář je od 23. 10. 2026 veřejný a úloha běží na GitHub Pages.
+
+Zbývá pilotáž se žáky a **licence**: repozitář zatím žádnou nemá, takže formálně
+platí „všechna práva vyhrazena“ a školy úlohu použít nesmějí. Rozhodne se po
+dohodě na pracovišti. Písmo Inter má vlastní licenci, viz `fonts/README.md`.
